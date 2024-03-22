@@ -27,7 +27,7 @@ function App() {
 
     const isSignedIn = true;
 
-    const theme = createTheme({
+    const changingTheme = createTheme({
         palette: {
             mode: 'light',
         },
@@ -36,6 +36,11 @@ function App() {
             fontFamily: ['Poppins', 'Work Sans', 'sans-serif'].join(','),
         },
     });
+
+    const themeChange = (mode) => {
+        // Change in local storage
+        localStorage.setItem('healthAppTheme', mode);
+    };
 
     useEffect(() => {
         const handler = (e) => {
@@ -48,11 +53,12 @@ function App() {
     }, []);
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={changingTheme}>
             <CssBaseline />
             {isSignedIn && (
                 <MainAppbar
                     {...{
+                        themeChange,
                         supportsPWA,
                         promptInstall,
                     }}
