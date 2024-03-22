@@ -1,6 +1,8 @@
-const express = require("express");
+import express from "express";
 // const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+
+// Helper packages
+import dotenv from "dotenv";
 
 const app = express();
 dotenv.config();
