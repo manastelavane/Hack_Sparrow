@@ -34,7 +34,7 @@ const GoogleOneTapLogin = () => {
         };
         await axios
             .post(
-                `${import.meta.env.REACT_APP_SERVER_URL}/api/user/googleSignUp`,
+                `${import.meta.env.VITE_SERVER_URL}/api/user/googleSignUp`,
                 {
                     uid,
                     email,
@@ -74,7 +74,7 @@ const GoogleOneTapLogin = () => {
     const handleGoogleLogIn = () => {
         try {
             window.google.accounts.id.initialize({
-                client_id: import.meta.env.REACT_APP_GOOGLE_CLIENT_ID,
+                client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
                 ux_mode: 'popup',
                 callback: handleResponse,
             });
@@ -99,6 +99,7 @@ const GoogleOneTapLogin = () => {
                 }
             });
         } catch (error) {
+            console.log(error);
             alert('Log In Failed. Please try again');
         }
     };

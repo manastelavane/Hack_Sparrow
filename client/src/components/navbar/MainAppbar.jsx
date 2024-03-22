@@ -26,6 +26,9 @@ import {
     InputAdornment,
     ListItemText,
     IconButton,
+    FormControl,
+    InputLabel,
+    Select,
 } from '@mui/material';
 
 // MUI Icons
@@ -67,6 +70,7 @@ import PropTypes from 'prop-types';
 MainAppbar.propTypes = {
     supportsPWA: PropTypes.bool,
     promptInstall: PropTypes.func,
+    themeChange: PropTypes.func,
 };
 
 function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
@@ -74,6 +78,8 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
     const dispatch = useDispatch();
 
     const currentUser = useSelector((state) => state.auth);
+
+    const mode = window.localStorage.getItem('healthAppTheme') || 'light';
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [selected, setSelected] = useState(
@@ -213,7 +219,7 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
             };
             const result = await axios({
                 method: 'PATCH',
-                url: `${import.meta.env.REACT_APP_SERVER_URL}/api/user/edit`,
+                url: `${import.meta.env.VITE_SERVER_URL}/api/user/edit`,
                 headers: {
                     'Content-Type': 'application/json',
                     authorization: `Bearer ${dnd}`,
@@ -248,12 +254,12 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
     // const uploadFile = async (file) => {
     //     const id = uuid();
     //     await storage.createFile(
-    //         import.meta.env.REACT_APP_APPWRITE_BUCKET_ID,
+    //         import.meta.env.VITE_APPWRITE_BUCKET_ID,
     //         id,
     //         file
     //     );
     //     const result = storage.getFilePreview(
-    //         import.meta.env.REACT_APP_APPWRITE_BUCKET_ID,
+    //         import.meta.env.VITE_APPWRITE_BUCKET_ID,
     //         id
     //     );
     //     return result;
@@ -293,7 +299,6 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                     borderRadius: '50%',
                 }}
             />
-
             {currentUser.isSignedIn ? (
                 <>
                     <CustomSwitcherGroup exclusive>
@@ -352,16 +357,6 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                             },
                         }}
                     >
-                        <MenuItem
-                            onClick={() => {
-                                alert('Change Theme');
-                            }}
-                        >
-                            <LightModeIcon
-                                sx={{ color: 'white', fontSize: '1.7rem' }}
-                            />
-                            <ListItemText sx={{ ml: 1 }} primary='Theme' />
-                        </MenuItem>
                         <MenuItem
                             onClick={() => {
                                 handleMenuClose();
@@ -630,8 +625,22 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                     </CustomSwitcherGroup>
                 </Box>
             )}
-
             {/* Theme Swticher dropDown */}
+            <FormControl fullWidth>
+                <InputLabel id='demo-simple-select-label'>Mode</InputLabel>
+                <Select
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
+                    value={mode}
+                    label='Age'
+                    onChange={themeChange}
+                >
+                    <MenuItem value={'light'}>Light</MenuItem>
+                    <MenuItem value={'dark'}>Dark</MenuItem>
+                    <MenuItem value={'accesible'}>Accesible</MenuItem>
+                </Select>
+            </FormControl>
+            ;
         </Box>
     );
 }

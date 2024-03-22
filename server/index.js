@@ -2,9 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
+const userRouter = require('./routes/user.js');
+
 const app = express();
 dotenv.config();
 const PORT = process.env.PORT || 8080;
+
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -16,6 +19,8 @@ app.use((req, res, next) => {
     next();
 });
 app.use(express.json({ limit: '10MB' }));
+
+app.use('/api/user', userRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello, welocme to  API!');
