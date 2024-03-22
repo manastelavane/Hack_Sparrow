@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import GoogleOneTapLogin from '../helpers/GoogleOneTapLogin';
 import Typography from '@mui/material/Typography';
 
 function LandingPage() {
@@ -132,6 +133,7 @@ function LandingPage() {
                                 allow='encrypted-media'
                             />
                         </Box>
+                        <GoogleOneTapLogin />
                     </Box>
                     <a
                         style={{

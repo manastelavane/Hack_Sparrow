@@ -13,10 +13,19 @@ import { useNavigate, Routes, Route } from 'react-router-dom';
 
 // Components
 import LandingPage from './components/routes/LandingPage';
+import MainAppbar from './components/navbar/MainAppbar';
+
+// Routes
+import Groups from './components/routes/groups/Groups';
 
 function App() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const [supportsPWA, setSupportsPWA] = useState(false);
+    const [promptInstall, setPromptInstall] = useState(null);
+
+    const isSignedIn = true;
 
     const theme = createTheme({
         palette: {
@@ -28,11 +37,30 @@ function App() {
         },
     });
 
+    useEffect(() => {
+        const handler = (e) => {
+            e.preventDefault();
+            setSupportsPWA(true);
+            setPromptInstall(e);
+        };
+
+        window.addEventListener('beforeinstallprompt', handler);
+    }, []);
+
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
+            {isSignedIn && (
+                <MainAppbar
+                    {...{
+                        supportsPWA,
+                        promptInstall,
+                    }}
+                />
+            )}
             <Routes>
                 <Route path='/' element={<LandingPage />} />
+                <Route path='/groups' element={<Groups />} />
             </Routes>
         </ThemeProvider>
     );
