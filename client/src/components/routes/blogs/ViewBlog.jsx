@@ -14,6 +14,7 @@ import Stack from '@mui/material/Stack';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import EmailIcon from '@mui/icons-material/Email';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { useSpeechSynthesis } from 'react-speech-kit'; // Import the hook
 
 // import { bluegrey, light, medium } from '../utils/colors';
 import {
@@ -21,6 +22,10 @@ import {
     startLoadingAction,
     stopLoadingAction,
 } from '../../../actions/actions';
+import {
+    VolumeUp as VolumeUpIcon,
+    Block as BlockIcon,
+} from '@mui/icons-material';
 
 function ViewBlog() {
     const navigate = useNavigate();
@@ -29,6 +34,7 @@ function ViewBlog() {
     const blogId = params.id;
     const author = useSelector((state) => state.auth);
     const [blog, setBlog] = useState(null);
+    const { speak, speaking, cancel } = useSpeechSynthesis();
 
     useEffect(() => {
         const fetchBlog = async () => {
@@ -96,6 +102,25 @@ function ViewBlog() {
         });
     };
 
+    // Function to read the blog content aloud and highlight each word as it is read
+    const toggleReadBlog = () => {
+        if (speaking) {
+            // If currently speaking, stop reading
+            cancel();
+        } else {
+            // If not speaking, start reading
+            speak({
+                text:
+                    blog?.title +
+                    ' by ' +
+                    blog?.authorName +
+                    ' on ' +
+                    blog?.createdAt.split('T')[0] +
+                    ' ' +
+                    blog?.content,
+            });
+        }
+    };
     return (
         <Box
             sx={{
@@ -115,6 +140,16 @@ function ViewBlog() {
                         p: 4,
                     }}
                 >
+                    <Button
+                        onClick={toggleReadBlog}
+                        variant='outlined'
+                        sx={{
+                            marginBottom: '1rem',
+                        }}
+                        endIcon={!speaking ? <VolumeUpIcon /> : <BlockIcon />}
+                    >
+                        {speaking ? 'Stop Reading' : 'Read Blog'}
+                    </Button>
                     <Typography
                         sx={{ textAlign: 'center' }}
                         gutterBottom
@@ -141,8 +176,18 @@ function ViewBlog() {
                     <div
                         className='content'
                         style={{ wordBreak: 'break-word' }}
-                        dangerouslySetInnerHTML={{ __html: blog?.content }}
-                    />
+                    >
+                        {/* Render each paragraph separately */}
+                        {blog?.content.split('</p>').map((paragraph, index) => (
+                            <p
+                                key={index}
+                                dangerouslySetInnerHTML={{ __html: paragraph }}
+                                style={{
+                                    backgroundColor: 'transparent',
+                                }}
+                            />
+                        ))}
+                    </div>
                 </CardContent>
                 <CardActions sx={{ px: 3, pb: 3 }}>
                     <Stack direction='row' spacing={1}>
