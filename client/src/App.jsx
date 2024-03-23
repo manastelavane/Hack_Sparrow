@@ -25,6 +25,7 @@ import MainAppbar from './components/navbar/MainAppbar';
 import ProtectedRoute from './components/helpers/ProtectedRoute';
 import Loading from './components/helpers/Loading';
 import Notify from './components/helpers/Notify';
+import VoiceRoom from './components/routes/groups/VoiceRoom';
 
 // Routes
 import Groups from './components/routes/groups/Groups';
@@ -130,6 +131,16 @@ function App() {
                         <ProtectedRoute>
                             <HMSRoomProvider>
                                 <Groups />
+                            </HMSRoomProvider>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/room/:id'
+                    element={
+                        <ProtectedRoute>
+                            <HMSRoomProvider>
+                                <VoiceRoom mode={mode} />
                             </HMSRoomProvider>
                         </ProtectedRoute>
                     }
