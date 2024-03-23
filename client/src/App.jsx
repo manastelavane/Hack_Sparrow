@@ -29,6 +29,10 @@ import Notify from './components/helpers/Notify';
 // Routes
 import Groups from './components/routes/groups/Groups';
 import Blogs from './components/routes/blogs/Blogs';
+import ViewBlog from './components/routes/blogs/ViewBlog';
+import CreateBlog from './components/routes/blogs/CreateBlog';
+import EditBlog from './components/routes/blogs/EditBlog';
+import Exam from './components/routes/exam/Exam';
 
 // Themes
 import themes from './utils/themes';
@@ -138,9 +142,32 @@ function App() {
                     path='/blogs'
                     element={
                         <ProtectedRoute>
-                            <HMSRoomProvider>
-                                <Blogs />
-                            </HMSRoomProvider>
+                            <Blogs />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route path='/blog/:id' element={<ViewBlog />} />
+                <Route
+                    path='/createBlog'
+                    element={
+                        <ProtectedRoute>
+                            <CreateBlog />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/editBlog/:id'
+                    element={
+                        <ProtectedRoute>
+                            <EditBlog />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/exam'
+                    element={
+                        <ProtectedRoute>
+                            <Exam />
                         </ProtectedRoute>
                     }
                 />
