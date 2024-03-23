@@ -82,10 +82,10 @@ function QuestionTable() {
 
     const formSubmitHandler = async () => {
         const values = Object.values(selectedOption);
-        // if (values.includes(null)) {
-        //     alert('Please answer all the questions');
-        //     return;
-        // }
+        if (values.includes(null)) {
+            alert('Please answer all the questions');
+            return;
+        }
         let ocd = 0,
             adhd = 0,
             depression = 0,

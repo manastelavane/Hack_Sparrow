@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import { Stack, Link } from '@mui/material';
+import { Stack } from '@mui/material';
 
 // import { otherUser } from './Connect';
 
@@ -76,7 +76,7 @@ const ProfileInfo = ({ otherUser, setProfileInfoOpen }) => {
                     }}
                 >
                     <Avatar
-                        alt={otherUser?.name.charAt(0).toUpperCase()}
+                        alt={otherUser?.username.charAt(0).toUpperCase()}
                         src={otherUser?.photoURL}
                         sx={{
                             height: 150,
@@ -85,7 +85,7 @@ const ProfileInfo = ({ otherUser, setProfileInfoOpen }) => {
                             top: 0,
                         }}
                     >
-                        {otherUser?.name.charAt(0).toUpperCase()}
+                        {otherUser?.username.charAt(0).toUpperCase()}
                     </Avatar>
                 </Box>
                 <Box
@@ -97,9 +97,9 @@ const ProfileInfo = ({ otherUser, setProfileInfoOpen }) => {
                 >
                     <Stack spacing={2}>
                         <Stack direction='row' alignItems='center' spacing={1}>
-                            <Typography variant='subtitle1'>Name -</Typography>
+                            <Typography variant='subtitle1'>Bio -</Typography>
                             <Chip
-                                label={otherUser?.name}
+                                label={otherUser?.bio}
                                 color='success'
                                 size='medium'
                             />
@@ -114,42 +114,6 @@ const ProfileInfo = ({ otherUser, setProfileInfoOpen }) => {
                                 size='medium'
                             />
                         </Stack>
-                        {otherUser?.socialLinks?.twitter && (
-                            <Stack
-                                direction='row'
-                                alignItems='center'
-                                spacing={1}
-                            >
-                                <Typography variant='subtitle1'>
-                                    Twitter -
-                                </Typography>
-                                <Link
-                                    href={otherUser.socialLinks.twitter}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    <TwitterIcon />
-                                </Link>
-                            </Stack>
-                        )}
-                        {otherUser?.socialLinks?.instagram && (
-                            <Stack
-                                direction='row'
-                                alignItems='center'
-                                spacing={1}
-                            >
-                                <Typography variant='subtitle1'>
-                                    Instagram -
-                                </Typography>
-                                <Link
-                                    href={otherUser.socialLinks.instagram}
-                                    target='_blank'
-                                    rel='noopener noreferrer'
-                                >
-                                    <InstagramIcon />
-                                </Link>
-                            </Stack>
-                        )}
                     </Stack>
                 </Box>
             </Box>
