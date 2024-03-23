@@ -113,11 +113,11 @@ const GoogleOneTapLogin = () => {
                     display: displayType,
                     width: 'fit-content',
                     mt: 3,
-                    backgroundColor: 'primary.main',
+                    backgroundColor: 'success.main',
                     color: 'primary.contrastText',
                     '&:hover': {
                         color: '#fff',
-                        backgroundColor: 'primary.dark',
+                        backgroundColor: 'success.dark',
                     },
                 }}
                 onClick={handleGoogleLogIn}

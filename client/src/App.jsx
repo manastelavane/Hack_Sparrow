@@ -11,9 +11,13 @@ import { useDispatch } from 'react-redux';
 // React Router
 import { useNavigate, Routes, Route } from 'react-router-dom';
 
+// HMS
+import { HMSRoomProvider } from '@100mslive/hms-video-react';
+
 // Components
 import LandingPage from './components/routes/LandingPage';
 import MainAppbar from './components/navbar/MainAppbar';
+import ProtectedRoute from './components/helpers/ProtectedRoute';
 
 // Routes
 import Groups from './components/routes/groups/Groups';
@@ -66,7 +70,16 @@ function App() {
             )}
             <Routes>
                 <Route path='/' element={<LandingPage />} />
-                <Route path='/groups' element={<Groups />} />
+                <Route
+                    path='/groups'
+                    element={
+                        <ProtectedRoute>
+                            <HMSRoomProvider>
+                                <Groups />
+                            </HMSRoomProvider>
+                        </ProtectedRoute>
+                    }
+                />
             </Routes>
         </ThemeProvider>
     );

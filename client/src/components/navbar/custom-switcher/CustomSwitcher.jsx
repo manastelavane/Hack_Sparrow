@@ -3,7 +3,7 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { styled } from '@mui/material/styles';
 
 export const CustomSwitcherGroup = styled(ToggleButtonGroup)(() => ({
-    backgroundColor: 'primary.main',
+    backgroundColor: 'darkgreen',
     borderRadius: '50px',
     '& .MuiToggleButtonGroup-grouped': {
         margin: 0,
@@ -13,11 +13,11 @@ export const CustomSwitcherGroup = styled(ToggleButtonGroup)(() => ({
         width: '150px',
         '&:not(:first-of-type)': {
             borderRadius: '50px',
-            border: `6px solid primary.main`,
+            border: `6px solid darkgreen`,
         },
         '&:first-of-type': {
             borderRadius: '50px',
-            border: `6px solid primary.main`,
+            border: `6px solid darkgreen`,
         },
     },
     '& .MuiToggleButton-root': {
@@ -28,17 +28,17 @@ export const CustomSwitcherGroup = styled(ToggleButtonGroup)(() => ({
         font: '600 0.8rem Poppins, sans-serif',
 
         '&:hover': {
-            backgroundColor: 'primary.main',
+            backgroundColor: 'success.main',
             color: 'black',
             transition: 'all 0.2s ease-in-out',
         },
 
         '&.Mui-selected': {
-            backgroundColor: 'primary.main',
+            backgroundColor: 'black',
             color: 'white',
 
             '&:hover': {
-                backgroundColor: 'primary.main',
+                backgroundColor: 'success.main',
                 color: 'white',
             },
         },

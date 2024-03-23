@@ -29,6 +29,7 @@ import {
     FormControl,
     InputLabel,
     Select,
+    Stack,
 } from '@mui/material';
 
 // MUI Icons
@@ -36,7 +37,6 @@ import {
     Groups2 as Groups2Icon,
     LibraryBooks as LibraryBooksIcon,
     Quiz as QuizIcon,
-    LightMode as LightModeIcon,
     Logout as LogoutIcon,
     Close as CloseIcon,
     GroupAdd as GroupAddIcon,
@@ -123,7 +123,7 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                 >
                     <DownloadIcon
                         sx={{
-                            color: 'primary.main',
+                            color: 'success.main',
                             fontSize: '1.7rem',
                             ml: -0.5,
                         }}
@@ -282,7 +282,7 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                bgcolor: 'primary.main',
+                bgcolor: 'success.main',
                 boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.5)',
                 color: 'white',
                 zIndex: '1000',
@@ -290,15 +290,19 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                 top: '0',
             }}
         >
-            <img
-                src={'/assets/vectors/logo-800x800.svg'}
-                alt='chat'
-                style={{
-                    width: '50px',
-                    height: '50px',
-                    borderRadius: '50%',
-                }}
-            />
+            <Stack direction='row' alignItems='center'>
+                <img
+                    src={'/assets/vectors/logo-800x800.svg'}
+                    alt='chat'
+                    style={{
+                        width: '50px',
+                        height: '50px',
+                        borderRadius: '50%',
+                        marginRight: '1rem',
+                    }}
+                />
+                <Typography>Placeholder</Typography>
+            </Stack>
             {currentUser.isSignedIn ? (
                 <>
                     <CustomSwitcherGroup exclusive>
@@ -336,7 +340,7 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                             alt={currentUser.name.charAt(0).toUpperCase()}
                             src={currentUser.photoURL}
                             sx={{
-                                bgcolor: 'primary.main',
+                                bgcolor: 'success.main',
                                 color: 'primary.contrastText',
                                 height: 50,
                                 width: 50,
@@ -353,7 +357,7 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                         onClose={handleMenuClose}
                         sx={{
                             '& .MuiPaper-root': {
-                                backgroundColor: 'primary.light',
+                                backgroundColor: 'success.light',
                             },
                         }}
                     >
@@ -372,7 +376,7 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                             />
                             <ListItemText sx={{ ml: 1 }} primary='Profile' />
                         </MenuItem>
-                        {renderInstallOption()}
+                        {/* {renderInstallOption()} */}
                         <MenuItem
                             onClick={() => {
                                 handleSignOut();
@@ -395,7 +399,7 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                                 transform: 'translate(-50%, -50%)',
                                 minWidth: 600,
                                 maxHeight: '700px',
-                                backgroundColor: 'primary.main',
+                                backgroundColor: 'success.main',
                                 boxShadow: 24,
                                 borderRadius: '10px',
                                 py: 2,
@@ -453,7 +457,7 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                                             .toUpperCase()}
                                         src={avatarURL}
                                         sx={{
-                                            bgcolor: 'primary.main',
+                                            bgcolor: 'success.main',
                                             color: 'primary.contrastText',
                                             height: 150,
                                             width: 150,
@@ -475,8 +479,8 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
 
                                         <Button
                                             sx={{ mr: 1 }}
-                                            color='success'
-                                            variant='outlined'
+                                            color='info'
+                                            variant='filled'
                                             size='small'
                                         >
                                             <label
@@ -596,11 +600,11 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                                 color='success'
                                 sx={{
                                     mt: 3,
-                                    backgroundColor: 'primary.light',
+                                    backgroundColor: 'success.light',
                                     color: 'white',
                                     font: '500 0.9rem Poppins, sans-serif',
                                     ':hover': {
-                                        backgroundColor: 'primary.dark',
+                                        backgroundColor: 'success.dark',
                                         color: 'black',
                                     },
                                 }}
@@ -615,22 +619,24 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                 </>
             ) : (
                 <Box sx={{ p: '3px' }}>
-                    <CustomSwitcherGroup>
+                    {/* <CustomSwitcherGroup>
                         <CustomSwitcherButton
                             onClick={() => navigate('/')}
                             value='/'
                         >
                             <GroupAddIcon /> Join Now
                         </CustomSwitcherButton>
-                    </CustomSwitcherGroup>
+                    </CustomSwitcherGroup> */}
                 </Box>
             )}
             {/* Theme Swticher dropDown */}
-            <FormControl fullWidth>
-                <InputLabel id='demo-simple-select-label'>Mode</InputLabel>
+            <FormControl variant='filled' sx={{ minWidth: 80 }}>
+                <InputLabel id='demo-simple-select-autowidth-label'>
+                    Mode
+                </InputLabel>
                 <Select
-                    labelId='demo-simple-select-label'
-                    id='demo-simple-select'
+                    labelId='demo-simple-select-autowidth-label'
+                    id='demo-simple-select-autowidth'
                     value={mode}
                     label='Age'
                     onChange={themeChange}
@@ -640,7 +646,6 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                     <MenuItem value={'accesible'}>Accesible</MenuItem>
                 </Select>
             </FormControl>
-            ;
         </Box>
     );
 }
