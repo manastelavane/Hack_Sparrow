@@ -364,7 +364,6 @@ function MainAppbar({
                         >
                             <AccountBoxIcon
                                 sx={{
-                                    color: 'seagreen', // '#4caf50
                                     fontSize: '1.7rem',
                                     ml: -0.5,
                                 }}
@@ -377,11 +376,7 @@ function MainAppbar({
                                 handleSignOut();
                             }}
                         >
-                            <LogoutIcon
-                                sx={{
-                                    color: 'error.light',
-                                }}
-                            />
+                            <LogoutIcon />
                             <ListItemText sx={{ ml: 1 }} primary='Logout' />
                         </MenuItem>
 
@@ -403,8 +398,8 @@ function MainAppbar({
                                     <MenuItem value='highContrast'>
                                         High Contrast
                                     </MenuItem>
-                                    <MenuItem value='colorBlind'>
-                                        Color Blind
+                                    <MenuItem value='redWeakProtoanomaly'>
+                                        Red Weak Protoanomaly
                                     </MenuItem>
                                 </Select>
                             </FormControl>

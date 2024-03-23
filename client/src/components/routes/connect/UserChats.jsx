@@ -211,10 +211,7 @@ const UserChats = ({
                                     sx={{
                                         fontSize: '14px',
                                         fontFamily: 'Helvetica',
-                                        color:
-                                            mode === 'light'
-                                                ? 'rgba(0, 0, 0, 0.54)'
-                                                : 'rgba(255, 255, 255, 0.54)',
+                                        opacity: 0.7,
                                         ml: 2,
                                     }}
                                 >

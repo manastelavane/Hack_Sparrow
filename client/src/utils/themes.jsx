@@ -65,30 +65,25 @@ const themes = {
             fontFamily: ['Poppins', 'Work Sans', 'sans-serif'].join(','),
         },
     },
-    colorBlind: {
+    redWeakProtoanomaly: {
         palette: {
-            mode: 'dark',
             primary: {
-                main: '#90caf9', // Light blue
+                main: '#635dc1',
             },
             secondary: {
-                main: '#a5d6a7', // Light green
+                main: '#7c9fa3',
             },
             error: {
-                main: '#ef9a9a', // Light red
+                main: '#ab750c',
             },
             warning: {
-                main: '#ffb74d', // Light orange
+                main: '#d0a807',
             },
             info: {
-                main: '#90caf9', // Light blue (similar to primary)
+                main: '#81ace4',
             },
             success: {
-                main: '#a5d6a7', // Light green (similar to secondary)
-            },
-            text: {
-                primary: '#ccc', // Light gray
-                secondary: '#999', // Medium gray
+                main: '#ace81e',
             },
         },
         typography: {
