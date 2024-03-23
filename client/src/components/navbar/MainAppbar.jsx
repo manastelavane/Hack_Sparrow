@@ -41,7 +41,7 @@ import {
     Twitter as TwitterIcon,
     Instagram as InstagramIcon,
     AccountBox as AccountBoxIcon,
-    Download as DownloadIcon,
+    // Download as DownloadIcon,
 } from '@mui/icons-material';
 
 // Appwrite
@@ -65,8 +65,8 @@ function MainAppbar({
     changingTheme,
     mode,
     themeChange,
-    supportsPWA,
-    promptInstall,
+    // supportsPWA,
+    // promptInstall,
 }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -92,38 +92,38 @@ function MainAppbar({
     const [name, setName] = useState(currentUser?.name);
     const [buttonStatus, setButtonStatus] = useState(true);
 
-    const onInstallClick = () => {
-        if (!supportsPWA) {
-            alert(
-                'Either you have already installed the app or your browser does not support PWA :('
-            );
-            return;
-        }
-        promptInstall.prompt();
-    };
+    // const onInstallClick = () => {
+    //     if (!supportsPWA) {
+    //         alert(
+    //             'Either you have already installed the app or your browser does not support PWA :('
+    //         );
+    //         return;
+    //     }
+    //     promptInstall.prompt();
+    // };
 
-    const renderInstallOption = () => {
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            return;
-        } else {
-            return (
-                <MenuItem
-                    onClick={() => {
-                        onInstallClick();
-                        handleMenuClose();
-                    }}
-                >
-                    <DownloadIcon
-                        sx={{
-                            fontSize: '1.7rem',
-                            ml: -0.5,
-                        }}
-                    />
-                    <ListItemText sx={{ ml: 1 }} primary='Install' />
-                </MenuItem>
-            );
-        }
-    };
+    // const renderInstallOption = () => {
+    //     if (window.matchMedia('(display-mode: standalone)').matches) {
+    //         return;
+    //     } else {
+    //         return (
+    //             <MenuItem
+    //                 onClick={() => {
+    //                     onInstallClick();
+    //                     handleMenuClose();
+    //                 }}
+    //             >
+    //                 <DownloadIcon
+    //                     sx={{
+    //                         fontSize: '1.7rem',
+    //                         ml: -0.5,
+    //                     }}
+    //                 />
+    //                 <ListItemText sx={{ ml: 1 }} primary='Install' />
+    //             </MenuItem>
+    //         );
+    //     }
+    // };
 
     const handleSignOut = () => {
         const choice = window.confirm('Please click on OK to Log Out.');
@@ -368,7 +368,7 @@ function MainAppbar({
                             />
                             <ListItemText sx={{ ml: 1 }} primary='Profile' />
                         </MenuItem>
-                        {renderInstallOption()}
+                        {/* {renderInstallOption()} */}
                         <MenuItem
                             onClick={() => {
                                 handleSignOut();
