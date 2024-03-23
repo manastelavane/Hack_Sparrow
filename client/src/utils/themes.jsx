@@ -90,6 +90,56 @@ const themes = {
             fontFamily: ['Poppins', 'Work Sans', 'sans-serif'].join(','),
         },
     },
+    greenBlindDeuteranopia: {
+        palette: {
+            primary: {
+                main: '#5a6da4', // Blue
+            },
+            secondary: {
+                main: '#a196ae', // Purple
+            },
+            error: {
+                main: '#a57c01', // Yellow
+            },
+            warning: {
+                main: '#dba400', // Orange
+            },
+            info: {
+                main: '#94a8ed',
+            },
+            success: {
+                main: '#ffd392',
+            },
+        },
+        typography: {
+            fontFamily: ['Poppins', 'Work Sans', 'sans-serif'].join(','),
+        },
+    },
+    blueWeakTritanomaly: {
+        palette: {
+            primary: {
+                main: '#a5517b', // Red
+            },
+            secondary: {
+                main: '#6ebb86', // Gray
+            },
+            error: {
+                main: '#d8593b', // Cyan
+            },
+            warning: {
+                main: '#e99965', // Teal
+            },
+            info: {
+                main: '#00a5cb', // Light red
+            },
+            success: {
+                main: '#58f3af', // Light blue
+            },
+        },
+        typography: {
+            fontFamily: ['Poppins', 'Work Sans', 'sans-serif'].join(','),
+        },
+    },
 };
 
 export default themes;

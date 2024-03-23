@@ -401,6 +401,14 @@ function MainAppbar({
                                     <MenuItem value='redWeakProtoanomaly'>
                                         Red Weak Protoanomaly
                                     </MenuItem>
+
+                                    <MenuItem value='greenBlindDeuteranopia'>
+                                        Green Blind Deuteranomaly
+                                    </MenuItem>
+
+                                    <MenuItem value='blueWeakTritanomaly'>
+                                        Blue Weak Tritanomaly
+                                    </MenuItem>
                                 </Select>
                             </FormControl>
                         </MenuItem>
