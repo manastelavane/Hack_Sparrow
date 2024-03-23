@@ -35,6 +35,7 @@ import CreateBlog from './components/routes/blogs/CreateBlog';
 import EditBlog from './components/routes/blogs/EditBlog';
 import Exam from './components/routes/exam/Exam';
 import Connect from './components/routes/connect/Connect';
+import PersonalCall from './components/routes/connect/PersonalCall';
 
 // Themes
 import themes from './utils/themes';
@@ -54,6 +55,7 @@ function App() {
         };
         window.addEventListener('beforeinstallprompt', handler);
         const token = window.localStorage.getItem('healthApp');
+        console.log(location.href);
         // console.log(token);
         const auth = JSON.parse(token);
         if (auth?.isSignedIn) {
@@ -77,6 +79,7 @@ function App() {
                 location.pathname.includes('/connect/pc/') ||
                 location.pathname.includes('/blog/')
             ) {
+                console.log('Redirecting to last page');
                 navigate(location.pathname);
                 return;
             }
@@ -181,6 +184,14 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <Connect mode={mode} />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/connect/pc/:id'
+                    element={
+                        <ProtectedRoute>
+                            <PersonalCall mode={mode} />
                         </ProtectedRoute>
                     }
                 />
