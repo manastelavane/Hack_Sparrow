@@ -79,7 +79,7 @@ const TextBody = ({ message, endRef }) => {
                               alignSelf: 'flex-end',
                               borderBottomLeftRadius: '20px',
                               borderBottomRightRadius: '1px',
-                              backgroundColor: 'primary.main',
+                              backgroundColor: 'primary.dark',
                           }
                         : {
                               backgroundColor: 'secondary.dark',
@@ -198,7 +198,7 @@ const TextBody = ({ message, endRef }) => {
                                             }
                                             sx={{
                                                 fontFamily: 'Helvetica',
-                                                color: 'background.paper',
+                                                color: 'inherit',
                                                 textDecoration: 'underline',
                                             }}
                                         >
