@@ -83,7 +83,7 @@ function Blogs() {
                 mt: '75px',
                 height: 'calc(100vh - 75px)',
                 maxHeight: 'calc(100vh - 75px)',
-                backgroundColor: 'background.default',
+                backgroundColor: 'background.paper',
                 padding: '5rem',
                 display: 'flex',
                 flexDirection: 'column',
@@ -94,7 +94,7 @@ function Blogs() {
                 variant='h1'
                 component='h2'
                 sx={{
-                    color: 'text.primary',
+                    color: 'secondary.main',
                     margin: '2rem',
                     fontWeight: 'bold',
                     fontSize: '3rem',
@@ -114,7 +114,7 @@ function Blogs() {
                 variant='h2'
                 component='h3'
                 sx={{
-                    color: 'text.primary',
+                    color: 'secondary.dark',
                     margin: '2rem',
                     fontFamily: 'Work Sans',
                     fontWeight: 'medium',
@@ -143,7 +143,7 @@ function Blogs() {
                                 ref={lastBlogRef}
                                 key={blog._id}
                                 sx={{
-                                    backgroundColor: 'success.light',
+                                    backgroundColor: 'primary.main',
                                     color: 'white',
                                     borderRadius: '10px',
                                     border: 'none',
@@ -245,14 +245,12 @@ function Blogs() {
             )}
             <Tooltip title='Create a new Blog'>
                 <Fab
-                    color='primary'
+                    color='secondary'
                     aria-label='add'
                     sx={{
                         position: 'fixed',
                         bottom: '2rem',
                         right: '2rem',
-                        color: 'white',
-                        backgroundColor: 'primary.main',
 
                         borderRadius: '50%',
                         height: '3.5rem',
@@ -262,11 +260,9 @@ function Blogs() {
                         placeItems: 'center',
                         cursor: 'pointer',
 
-                        boxShadow: '0 0 10px 0 rgba(78,135,140, 0.5)',
+                        boxShadow: '0 0 10px 0 rgba(78,135,140, 0.3)',
 
                         '&:hover': {
-                            backgroundColor: 'primary.dark',
-                            color: 'white',
                             transform: 'scale(1.1) rotate(90deg)',
                             transition: 'transform 0.2s ease-in-out',
                         },

@@ -67,14 +67,13 @@ import {
 
 import PropTypes from 'prop-types';
 
-MainAppbar.propTypes = {
-    mode: PropTypes.string,
-    supportsPWA: PropTypes.bool,
-    promptInstall: PropTypes.func,
-    themeChange: PropTypes.func,
-};
-
-function MainAppbar({ mode, themeChange, supportsPWA, promptInstall }) {
+function MainAppbar({
+    changingTheme,
+    mode,
+    themeChange,
+    supportsPWA,
+    promptInstall,
+}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -122,7 +121,7 @@ function MainAppbar({ mode, themeChange, supportsPWA, promptInstall }) {
                 >
                     <DownloadIcon
                         sx={{
-                            color: 'success.main',
+                            color: 'primary.main',
                             fontSize: '1.7rem',
                             ml: -0.5,
                         }}
@@ -281,7 +280,7 @@ function MainAppbar({ mode, themeChange, supportsPWA, promptInstall }) {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                bgcolor: 'success.main',
+                bgcolor: 'primary.main',
                 boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.5)',
                 color: 'white',
                 zIndex: '1000',
@@ -304,7 +303,7 @@ function MainAppbar({ mode, themeChange, supportsPWA, promptInstall }) {
             </Stack>
             {currentUser.isSignedIn ? (
                 <>
-                    <CustomSwitcherGroup exclusive>
+                    <CustomSwitcherGroup exclusive theme={changingTheme}>
                         <CustomSwitcherButton
                             onClick={() => handleNavigation('groups')}
                             value='groups'
@@ -339,7 +338,7 @@ function MainAppbar({ mode, themeChange, supportsPWA, promptInstall }) {
                             alt={currentUser.name.charAt(0).toUpperCase()}
                             src={currentUser.photoURL}
                             sx={{
-                                bgcolor: 'success.main',
+                                bgcolor: 'primary.main',
                                 color: 'primary.contrastText',
                                 height: 50,
                                 width: 50,
@@ -356,7 +355,7 @@ function MainAppbar({ mode, themeChange, supportsPWA, promptInstall }) {
                         onClose={handleMenuClose}
                         sx={{
                             '& .MuiPaper-root': {
-                                backgroundColor: 'success.light',
+                                backgroundColor: 'primary.light',
                             },
                         }}
                     >
@@ -388,6 +387,31 @@ function MainAppbar({ mode, themeChange, supportsPWA, promptInstall }) {
                             />
                             <ListItemText sx={{ ml: 1 }} primary='Logout' />
                         </MenuItem>
+
+                        <MenuItem>
+                            {/* Theme Swticher dropDown */}
+                            <FormControl
+                                variant='outlined'
+                                sx={{ minWidth: 80 }}
+                            >
+                                <Select
+                                    labelId='demo-simple-select-autowidth-label'
+                                    id='demo-simple-select-autowidth'
+                                    value={mode}
+                                    onChange={themeChange}
+                                    sx={{ color: 'secondary.dark' }}
+                                >
+                                    <MenuItem value='light'>Light</MenuItem>
+                                    <MenuItem value='dark'>Dark</MenuItem>
+                                    <MenuItem value='highContrast'>
+                                        High Contrast
+                                    </MenuItem>
+                                    <MenuItem value='colorBlind'>
+                                        Color Blind
+                                    </MenuItem>
+                                </Select>
+                            </FormControl>
+                        </MenuItem>
                     </Menu>
                     <Modal open={modalVisible}>
                         <Box
@@ -398,7 +422,7 @@ function MainAppbar({ mode, themeChange, supportsPWA, promptInstall }) {
                                 transform: 'translate(-50%, -50%)',
                                 minWidth: 600,
                                 maxHeight: '700px',
-                                backgroundColor: 'success.main',
+                                backgroundColor: 'primary.main',
                                 boxShadow: 24,
                                 borderRadius: '10px',
                                 py: 2,
@@ -456,7 +480,7 @@ function MainAppbar({ mode, themeChange, supportsPWA, promptInstall }) {
                                             .toUpperCase()}
                                         src={avatarURL}
                                         sx={{
-                                            bgcolor: 'success.main',
+                                            bgcolor: 'primary.main',
                                             color: 'primary.contrastText',
                                             height: 150,
                                             width: 150,
@@ -599,13 +623,7 @@ function MainAppbar({ mode, themeChange, supportsPWA, promptInstall }) {
                                 color='success'
                                 sx={{
                                     mt: 3,
-                                    backgroundColor: 'success.light',
-                                    color: 'white',
                                     font: '500 0.9rem Poppins, sans-serif',
-                                    ':hover': {
-                                        backgroundColor: 'success.dark',
-                                        color: 'black',
-                                    },
                                 }}
                                 variant='contained'
                                 disabled={buttonStatus}
@@ -628,24 +646,6 @@ function MainAppbar({ mode, themeChange, supportsPWA, promptInstall }) {
                     </CustomSwitcherGroup> */}
                 </Box>
             )}
-            {/* Theme Swticher dropDown */}
-            <FormControl variant='filled' sx={{ minWidth: 80 }}>
-                <InputLabel id='demo-simple-select-autowidth-label'>
-                    Mode
-                </InputLabel>
-                <Select
-                    labelId='demo-simple-select-autowidth-label'
-                    id='demo-simple-select-autowidth'
-                    value={mode}
-                    onChange={themeChange}
-                    sx={{ color: 'secondary.contrastText' }}
-                >
-                    <MenuItem value='light'>Light</MenuItem>
-                    <MenuItem value='dark'>Dark</MenuItem>
-                    <MenuItem value='highContrast'>High Contrast</MenuItem>
-                    <MenuItem value='colorBlind'>Color Blind</MenuItem>
-                </Select>
-            </FormControl>
         </Box>
     );
 }

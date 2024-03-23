@@ -2,7 +2,15 @@ const themes = {
     light: {
         palette: {
             mode: 'light',
-            // other light theme settings
+            primary: {
+                main: '#93e5ab', // Blue
+            },
+            secondary: {
+                main: '#4e878c',
+            },
+            background: {
+                paper: '#DBFFF1',
+            },
         },
         typography: {
             fontFamily: ['Poppins', 'Work Sans', 'sans-serif'].join(','),

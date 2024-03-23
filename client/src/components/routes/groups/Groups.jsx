@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuid } from 'uuid';
@@ -20,21 +20,13 @@ import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useHMSActions } from '@100mslive/hms-video-react';
 
-// import {
-//     bluegrey,
-//     richBlack,
-//     light,
-//     medium,
-//     dark,
-//     deepDark,
-// } from '../utils/colors';
 import {
     startLoadingAction,
     stopLoadingAction,
     notifyAction,
 } from '../../../actions/actions';
 
-const Groups = ({ mode }) => {
+const Groups = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const hmsActions = useHMSActions();
@@ -269,7 +261,7 @@ const Groups = ({ mode }) => {
                 mt: '75px',
                 height: 'calc(100vh - 75px)',
                 maxHeight: 'calc(100vh - 75px)',
-                // backgroundColor: mode === 'light' ? light : bluegrey,
+                backgroundColor: 'background.paper',
                 padding: '5rem',
                 pt: 0,
             }}
@@ -278,7 +270,7 @@ const Groups = ({ mode }) => {
                 variant='h1'
                 component='h2'
                 sx={{
-                    // color: mode === 'light' ? deepDark : light,
+                    color: 'secondary.main',
                     margin: '2rem',
                     fontWeight: 'bold',
                     fontSize: '3rem',
@@ -329,17 +321,8 @@ const Groups = ({ mode }) => {
                         <Card
                             key={space.roomId}
                             sx={{
-                                // backgroundColor:
-                                //     mode === 'light' ? deepDark : richBlack,
-                                // color:
-                                //     mode === 'light'
-                                //         ? light
-                                //         : dark.concat('aa'),
+                                backgroundColor: 'primary.light',
                                 borderRadius: '10px',
-                                // border:
-                                //     mode === 'light'
-                                //         ? 'none'
-                                //         : `1px solid ${dark.concat('aa')}`,
                                 height: '100%',
                                 display: 'flex',
                                 flexDirection: 'column',
@@ -393,18 +376,9 @@ const Groups = ({ mode }) => {
                                 </Box>
                                 <Button
                                     disableElevation
-                                    color='success'
+                                    color='secondary'
                                     variant='contained'
-                                    sx={{
-                                        mt: 0,
-                                        // backgroundColor:
-                                        //     mode === 'light' ? medium : light,
-                                        color: 'black',
-                                        ':hover': {
-                                            // backgroundColor: light,
-                                            color: 'black',
-                                        },
-                                    }}
+                                    sx={{ borderRadius: '10px' }}
                                     onClick={() => {
                                         joinGroup(
                                             space.roomId,
@@ -417,7 +391,7 @@ const Groups = ({ mode }) => {
                                 </Button>
                                 {space.createdById === currentUser.uid && (
                                     <Button
-                                        sx={{ ml: 2 }}
+                                        sx={{ ml: 2, borderRadius: '10px' }}
                                         disableElevation
                                         variant='contained'
                                         color='error'
@@ -463,8 +437,8 @@ const Groups = ({ mode }) => {
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
                         minWidth: 600,
-                        maxHeight: '700px',
-                        // backgroundColor: mode === 'light' ? light : bluegrey,
+                        maxHeight: '500px',
+                        backgroundColor: 'primary.light',
                         boxShadow: 24,
                         borderRadius: '10px',
                         p: 2,
@@ -495,7 +469,8 @@ const Groups = ({ mode }) => {
                         sx={{
                             textAlign: 'center',
                             mb: 3,
-                            // color: mode === 'light' ? deepDark : light,
+                            color: 'secondary.main',
+                            font: '600 1.5rem/1.5rem Poppins, sans-serif',
                         }}
                     >
                         Create New Group
@@ -517,7 +492,7 @@ const Groups = ({ mode }) => {
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             sx={{
-                                mb: 3,
+                                mb: 1,
                                 '& .MuiInputBase-input': {
                                     p: 1,
                                 },
@@ -536,7 +511,7 @@ const Groups = ({ mode }) => {
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             sx={{
-                                mb: 3,
+                                mb: 1,
                                 '& .MuiInputBase-input': {
                                     p: 1,
                                 },
@@ -550,8 +525,8 @@ const Groups = ({ mode }) => {
                             <img
                                 style={{
                                     objectFit: 'fill',
-                                    maxHeight: '300px',
-                                    width: '455px',
+                                    maxHeight: '230px',
+                                    width: '400px',
                                     alignSelf: 'center',
                                     position: 'relative',
                                 }}
@@ -561,38 +536,22 @@ const Groups = ({ mode }) => {
                         )}
                         <Button
                             disableElevation
-                            color='success'
+                            color='secondary'
                             variant='contained'
                             sx={{
                                 mt: 1,
                                 alignSelf: 'center',
-                                // backgroundColor:
-                                //     mode === 'light' ? medium : light,
-                                color: 'black',
-                                ':hover': {
-                                    // backgroundColor: medium,
-                                    color: 'black',
-                                },
                             }}
                             onClick={generateCoverImgURL}
                         >
                             Change Cover Image
                         </Button>
                         <Button
-                            color='success'
+                            color='secondary'
                             variant='contained'
                             disableElevation
                             sx={{
-                                mt: 1,
-                                mb: 1,
                                 alignSelf: 'flex-end',
-                                // backgroundColor:
-                                //     mode === 'light' ? medium : light,
-                                color: 'black',
-                                ':hover': {
-                                    // backgroundColor: medium,
-                                    color: 'black',
-                                },
                             }}
                             type='submit'
                         >
@@ -603,14 +562,12 @@ const Groups = ({ mode }) => {
             </Modal>
             <Tooltip title='Create a new Group'>
                 <Fab
-                    color='primary'
+                    color='secondary'
                     aria-label='add'
                     sx={{
                         position: 'fixed',
                         bottom: '2rem',
                         right: '2rem',
-                        // color: mode === 'light' ? 'white' : deepDark,
-                        // backgroundColor: mode === 'light' ? deepDark : light,
 
                         borderRadius: '50%',
                         height: '3.5rem',
@@ -620,11 +577,9 @@ const Groups = ({ mode }) => {
                         placeItems: 'center',
                         cursor: 'pointer',
 
-                        boxShadow: '0 0 10px 0 rgba(78,135,140, 0.5)',
+                        boxShadow: '0 0 10px 0 rgba(78,135,140, 0.3)',
 
                         '&:hover': {
-                            // backgroundColor: mode === 'dark' ? light : deepDark,
-                            // color: mode === 'dark' ? deepDark : light,
                             transform: 'scale(1.1) rotate(90deg)',
                             transition: 'transform 0.2s ease-in-out',
                         },

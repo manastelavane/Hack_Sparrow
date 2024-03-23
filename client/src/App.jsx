@@ -121,6 +121,7 @@ function App() {
             {isSignedIn && (
                 <MainAppbar
                     {...{
+                        changingTheme,
                         mode,
                         themeChange,
                         supportsPWA,

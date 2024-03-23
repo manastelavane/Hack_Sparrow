@@ -179,7 +179,7 @@ function QuestionTable() {
                         <TableRow key={question.id}>
                             <TableCell
                                 sx={{
-                                    color: 'primary.main',
+                                    color: 'secondary.main',
                                     border: 'none',
                                     boxShadow: 'none',
                                     borderRadius: 'none',
@@ -197,7 +197,7 @@ function QuestionTable() {
                                     variant='h4'
                                     component='h4'
                                     sx={{
-                                        color: 'primary.main',
+                                        color: 'secondary.dark',
                                         m: '1rem',
                                         mt: '2px',
                                         mr: '2rem',
@@ -219,7 +219,7 @@ function QuestionTable() {
                                         variant='h4'
                                         component='h5'
                                         sx={{
-                                            color: 'primary.main',
+                                            color: 'secondary.main',
                                             fontFamily: 'Work Sans',
                                             fontWeight: 'medium',
                                             fontSize: '1.1rem',
@@ -251,7 +251,7 @@ function QuestionTable() {
                                             }}
                                             value={0}
                                             label='Not at all'
-                                            control={<Radio color='success' />}
+                                            control={<Radio color='primary' />}
                                         />
                                         <FormControlLabel
                                             sx={{
