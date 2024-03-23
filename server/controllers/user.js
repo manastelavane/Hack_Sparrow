@@ -53,7 +53,7 @@ exports.googleSignUp = async (req, res) => {
 exports.editProfile = async (req, res) => {
     try {
         const { uid, email, username } = req.user;
-        const { name, photoURL, socialLinks, updatedUsername } = req.body;
+        const { name, photoURL, socialLinks, updatedUsername, isPrivacyAccepted } = req.body;
         const user = await UserModel.findOne({ uid });
         if (!user) {
             res.status(404).json({
@@ -62,7 +62,7 @@ exports.editProfile = async (req, res) => {
             });
         }
         const token = jwt.sign(
-            { uid, email, name, photoURL, username, socialLinks },
+            { uid, email, name, photoURL, username, socialLinks, isPrivacyAccepted },
             process.env.HMS_SECRET_APP,
             {
                 expiresIn: '48h',
@@ -70,7 +70,7 @@ exports.editProfile = async (req, res) => {
         );
         const updatedUser = await UserModel.findOneAndUpdate(
             { uid },
-            { name, photoURL, socialLinks, username: updatedUsername },
+            { name, photoURL, socialLinks, username: updatedUsername, isPrivacyAccepted },
             { new: true }
         );
         res.status(200).json({
@@ -93,11 +93,11 @@ exports.search = async (req, res) => {
         const userId = req.params.userId;
         const keyword = req.query.search
             ? {
-                  $or: [
-                      { name: { $regex: req.query.search, $options: 'i' } },
-                      { username: { $regex: req.query.search, $options: 'i' } },
-                  ],
-              }
+                $or: [
+                    { name: { $regex: req.query.search, $options: 'i' } },
+                    { username: { $regex: req.query.search, $options: 'i' } },
+                ],
+            }
             : {};
         const users = await UserModel.find(keyword).find({
             uid: { $ne: userId },

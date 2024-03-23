@@ -16,7 +16,6 @@ import EmailIcon from '@mui/icons-material/Email';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { useSpeechSynthesis } from 'react-speech-kit'; // Import the hook
 
-// import { bluegrey, light, medium } from '../utils/colors';
 import {
     notifyAction,
     startLoadingAction,

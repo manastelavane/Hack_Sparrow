@@ -36,6 +36,7 @@ import EditBlog from './components/routes/blogs/EditBlog';
 import Exam from './components/routes/exam/Exam';
 import Connect from './components/routes/connect/Connect';
 import PersonalCall from './components/routes/connect/PersonalCall';
+import PrivacyPolicy from '../src/components/routes/privacy/PrivacyPolicy';
 
 // Themes
 import themes from './utils/themes';
@@ -200,6 +201,14 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <Exam />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/privacy'
+                    element={
+                        <ProtectedRoute>
+                            <PrivacyPolicy />
                         </ProtectedRoute>
                     }
                 />
