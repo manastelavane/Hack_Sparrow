@@ -19,6 +19,16 @@ const themes = {
     dark: {
         palette: {
             mode: 'dark',
+
+            primary: {
+                main: '#4e878c', // Dark blue
+            },
+            secondary: {
+                main: '#93e5ab', // Light green
+            },
+            background: {
+                paper: '#1a1a1a', // Dark gray
+            },
             // other dark theme settings
         },
         typography: {

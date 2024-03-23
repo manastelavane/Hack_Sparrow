@@ -198,7 +198,8 @@ const Connect = ({ mode }) => {
                         <Tab
                             sx={{
                                 fontSize: '1.1rem',
-                                borderRight: '1px solid red',
+                                borderRight: '1.5px solid',
+                                borderColor: 'primary.dark',
                             }}
                             icon={
                                 <SettingsIcon
@@ -214,7 +215,8 @@ const Connect = ({ mode }) => {
                         height: 'calc(100vh - 136px)',
                         overflowY: 'auto',
                         backgroundColor: 'background.paper',
-                        borderRight: '1px solid red',
+                        borderRight: '1.5px solid',
+                        borderColor: 'primary.dark',
                     }}
                 >
                     {value === 0 && (
