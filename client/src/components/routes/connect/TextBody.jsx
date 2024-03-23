@@ -79,10 +79,10 @@ const TextBody = ({ message, endRef }) => {
                               alignSelf: 'flex-end',
                               borderBottomLeftRadius: '20px',
                               borderBottomRightRadius: '1px',
-                              backgroundColor: 'primary.dark',
+                              backgroundColor: 'primary.main',
                           }
                         : {
-                              backgroundColor: 'secondary.main',
+                              backgroundColor: 'secondary.dark',
                               borderBottomLeftRadius: '2px',
                           }),
                     ...(isImage
@@ -198,12 +198,7 @@ const TextBody = ({ message, endRef }) => {
                                             }
                                             sx={{
                                                 fontFamily: 'Helvetica',
-                                                ...(currentUser.uid ===
-                                                message.senderId
-                                                    ? {
-                                                          color: '#00f6ff',
-                                                      }
-                                                    : { color: '#1769e3' }),
+                                                color: 'background.paper',
                                                 textDecoration: 'underline',
                                             }}
                                         >

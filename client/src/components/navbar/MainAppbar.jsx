@@ -27,9 +27,7 @@ import {
     ListItemText,
     IconButton,
     FormControl,
-    InputLabel,
     Select,
-    Stack,
 } from '@mui/material';
 
 // MUI Icons
@@ -47,7 +45,7 @@ import {
 } from '@mui/icons-material';
 
 // Appwrite
-// import storage from '../../appwrite';
+import storage from '../../appwrite';
 
 import {
     CustomSwitcherGroup,
@@ -62,10 +60,6 @@ import {
     signInAction,
     notifyAction,
 } from '../../actions/actions';
-
-// Props: supportsPWA, promptInstall
-
-import PropTypes from 'prop-types';
 
 function MainAppbar({
     changingTheme,
@@ -121,7 +115,6 @@ function MainAppbar({
                 >
                     <DownloadIcon
                         sx={{
-                            color: 'primary.main',
                             fontSize: '1.7rem',
                             ml: -0.5,
                         }}
@@ -205,7 +198,7 @@ function MainAppbar({
             dispatch(startLoadingAction());
             let newURL = avatarURL;
             if (imageFile !== null) {
-                // newURL = await uploadFile(imageFile);
+                newURL = await uploadFile(imageFile);
             }
             const data = {
                 name,
@@ -227,10 +220,15 @@ function MainAppbar({
             setButtonStatus(true);
             setName(result.data.result.name);
             setAvatarURL(result.data.result.photoURL);
-            setTwitterProfile(result.data.result.socialLinks.twitter);
-            setInstagramProfile(result.data.result.socialLinks.instagram);
+            setTwitterProfile(
+                result.data.result.socialLinks.twitter.toString()
+            );
+            setInstagramProfile(
+                result.data.result.socialLinks.instagram.toString()
+            );
             dispatch(
                 signInAction(
+                    true,
                     result.data.result.uid,
                     result.data.result.email,
                     result.data.result.name,
@@ -249,19 +247,19 @@ function MainAppbar({
         }
     };
 
-    // const uploadFile = async (file) => {
-    //     const id = uuid();
-    //     await storage.createFile(
-    //         import.meta.env.VITE_APPWRITE_BUCKET_ID,
-    //         id,
-    //         file
-    //     );
-    //     const result = storage.getFilePreview(
-    //         import.meta.env.VITE_APPWRITE_BUCKET_ID,
-    //         id
-    //     );
-    //     return result;
-    // };
+    const uploadFile = async (file) => {
+        const id = uuid();
+        await storage.createFile(
+            import.meta.env.VITE_APPWRITE_BUCKET_ID,
+            id,
+            file
+        );
+        const result = storage.getFilePreview(
+            import.meta.env.VITE_APPWRITE_BUCKET_ID,
+            id
+        );
+        return result;
+    };
 
     const handleModalClose = () => {
         setModalVisible(false);
@@ -370,7 +368,7 @@ function MainAppbar({
                             />
                             <ListItemText sx={{ ml: 1 }} primary='Profile' />
                         </MenuItem>
-                        {/* {renderInstallOption()} */}
+                        {renderInstallOption()}
                         <MenuItem
                             onClick={() => {
                                 handleSignOut();
