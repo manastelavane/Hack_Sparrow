@@ -93,7 +93,7 @@ function Exam() {
                 <Typography
                     sx={{
                         fontFamily: 'Work Sans',
-                        fontWeight: '400',
+                        fontWeight: '600',
                         fontSize: '1.1rem',
                         textAlign: 'left',
                         display: 'flex',

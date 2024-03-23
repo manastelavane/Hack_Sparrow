@@ -391,7 +391,6 @@ function MainAppbar({
                                     id='demo-simple-select-autowidth'
                                     value={mode}
                                     onChange={themeChange}
-                                    sx={{ color: 'secondary.dark' }}
                                 >
                                     <MenuItem value='light'>Light</MenuItem>
                                     <MenuItem value='dark'>Dark</MenuItem>

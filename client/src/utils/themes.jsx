@@ -37,28 +37,30 @@ const themes = {
     },
     highContrast: {
         palette: {
-            // custom theme settings
+            mode: 'dark',
             primary: {
-                main: '#000',
+                main: '#000000', // Black
+                contrastText: '#ffffff', // White
             },
             secondary: {
-                main: '#fff',
+                main: '#ffffff', // White
+                contrastText: '#000000', // Black
             },
+            background: {
+                paper: '#000000', // Black
+            },
+            // other high contrast settings
             error: {
-                main: '#f00',
+                main: '#ff0000', // Red
             },
             warning: {
-                main: '#ff0',
+                main: '#ffff00', // Yellow
             },
             info: {
-                main: '#0ff',
+                main: '#0000ff', // Blue
             },
             success: {
-                main: '#0f0',
-            },
-            text: {
-                primary: '#000',
-                secondary: '#fff',
+                main: '#008000', // Green
             },
         },
         typography: {
