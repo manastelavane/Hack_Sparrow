@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 import axios from 'axios';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
     signInAction,
     startLoadingAction,
@@ -20,10 +20,6 @@ const GoogleOneTapLogin = () => {
 
     const [displayType, setDisplayType] = useState('flex');
     const [gBtnDisplay, setGBtnDisplay] = useState('none');
-
-    const isPrivacyAccepted = useSelector(
-        (state) => state.auth.isPrivacyAccepted
-    );
 
     const handleResponse = async (response) => {
         dispatch(startLoadingAction());
@@ -72,7 +68,7 @@ const GoogleOneTapLogin = () => {
                         user.token
                     )
                 );
-                if (isPrivacyAccepted) {
+                if (user.isPrivacyAccepted) {
                     window.localStorage.setItem('healthAppLastPage', 'groups');
                     navigate('/groups');
                 } else {

@@ -1,8 +1,68 @@
+import { useState } from 'react';
+
 // MUI imports
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
+// React Router imports
+import { useNavigate } from 'react-router-dom';
+
+// Axios
+import axios from 'axios';
+
+// Redux
+import { useDispatch } from 'react-redux';
+
+// Actions
+import {
+    stopLoadingAction,
+    startLoadingAction,
+    notifyAction,
+} from '../../../actions/actions';
+
 export default function PrivacyPolicy() {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const [isPrivacyAccepted, setIsPrivacyAccepted] = useState(false);
+    const [buttonDisabled, setButtonDisabled] = useState(true);
+
+    const handleCheckboxChange = (e) => {
+        setIsPrivacyAccepted(e.target.checked);
+        setButtonDisabled(!e.target.checked);
+    };
+
+    // On submit, send the isPrivacyAccepted value to the server
+    // to update the user's profile
+    const handleSubmit = async () => {
+        const auth = window.localStorage.getItem('healthApp');
+        const { dnd } = JSON.parse(auth);
+        try {
+            dispatch(startLoadingAction());
+            const data = {
+                isPrivacyAccepted,
+            };
+            const result = await axios({
+                method: 'PATCH',
+                url: `${import.meta.env.VITE_SERVER_URL}/api/user/edit`,
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `Bearer ${dnd}`,
+                },
+                data,
+            });
+            dispatch(stopLoadingAction());
+
+            if (result.data.success) {
+                dispatch(notifyAction(result.data.message, 'success'));
+                navigate('/groups');
+            }
+        } catch (error) {
+            dispatch(stopLoadingAction());
+            dispatch(notifyAction(error.response.data.message, 'error'));
+        }
+    };
+
     return (
         <Box
             sx={{
@@ -130,6 +190,35 @@ export default function PrivacyPolicy() {
                 <Typography variant='overline' display='block' gutterBottom>
                     Last updated: [Date] [Your App Name] Team
                 </Typography>
+            </Box>
+
+            {/* Checkbox for accepting privacy */}
+            <Box
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    mt: '2rem',
+                }}
+            >
+                <input
+                    type='checkbox'
+                    id='privacy'
+                    name='privacy'
+                    onChange={handleCheckboxChange}
+                />
+                <label htmlFor='privacy'>
+                    I have read and accept the Privacy Policy
+                </label>
+
+                <Button
+                    variant='contained'
+                    disabled={buttonDisabled}
+                    sx={{ ml: 2 }}
+                    onClick={handleSubmit}
+                >
+                    Continue
+                </Button>
             </Box>
         </Box>
     );
