@@ -53,7 +53,7 @@ function Exam() {
                     alignItems: 'center',
                 }}
             >
-                Hey {currentUser.name}, You are not alone :)
+                Hey {currentUser.username}, You are not alone :)
             </Typography>
             <Box
                 sx={{

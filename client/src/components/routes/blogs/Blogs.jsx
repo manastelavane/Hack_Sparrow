@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Fab from '@mui/material/Fab';
@@ -11,6 +11,10 @@ import ChromeReaderModeIcon from '@mui/icons-material/ChromeReaderMode';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 import { notifyAction } from '../../../actions/actions';
 
@@ -22,15 +26,24 @@ function Blogs() {
     const [pageNum, setPageNum] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const [loading, setLoading] = useState(false);
+    const [filter, setFilter] = useState(1);
+    const currentUser = useSelector((state) => state.auth);
+
+    const handleChange = (event) => {
+        setFilter(event.target.value);
+    };
 
     useEffect(() => {
         const getBlogs = async () => {
             try {
+                setBlogs(null);
                 setLoading(true);
                 const blogsFromServer = await axios.get(
                     `${
                         import.meta.env.VITE_SERVER_URL
-                    }/api/blog?page=${pageNum}`
+                    }/api/blog?page=${pageNum}&filter=${filter}&uid=${
+                        currentUser.uid
+                    }`
                 );
                 setBlogs((prev) => {
                     if (!prev || prev.length === 0) {
@@ -56,7 +69,7 @@ function Blogs() {
             }
         };
         getBlogs();
-    }, [dispatch, pageNum]);
+    }, [dispatch, pageNum, filter]);
 
     const handleClick = (id) => {
         navigate(`/blog/${id}`);
@@ -127,6 +140,23 @@ function Blogs() {
                 here.
             </Typography>
 
+            <Box sx={{ minWidth: 120, mb: 4 }}>
+                <FormControl>
+                    <InputLabel id='demo-simple-select-label'>
+                        Filter
+                    </InputLabel>
+                    <Select
+                        id='demo-simple-select'
+                        value={filter}
+                        label='Filter'
+                        onChange={handleChange}
+                    >
+                        <MenuItem value={1}>Latest</MenuItem>
+                        <MenuItem value={2}>Recommended</MenuItem>
+                    </Select>
+                </FormControl>
+            </Box>
+
             <Box
                 sx={{
                     display: 'grid',
@@ -172,7 +202,7 @@ function Blogs() {
                                         }}
                                     >
                                         by{' '}
-                                        {`${blog.authorName}  on   ${
+                                        {`${blog.authorUsername}  on   ${
                                             blog.createdAt.split('T')[0]
                                         }`}
                                     </Typography>
@@ -219,7 +249,7 @@ function Blogs() {
                                         }}
                                     >
                                         by{' '}
-                                        {`${blog.authorName}  on   ${
+                                        {`${blog.authorUsername}  on   ${
                                             blog.createdAt.split('T')[0]
                                         }`}
                                     </Typography>

@@ -271,7 +271,7 @@ const ChatInterface = ({ mode, otherUser, socketRef, connectSettings }) => {
                         <Typography
                             sx={{ fontWeight: '400', ml: 3, fontSize: '1rem' }}
                         >
-                            {otherUser.name}
+                            {'@' + otherUser.username}
                         </Typography>
                         <Typography
                             sx={{
@@ -284,11 +284,11 @@ const ChatInterface = ({ mode, otherUser, socketRef, connectSettings }) => {
                                         : 'rgba(255, 255, 255, 0.54)',
                             }}
                         >
-                            {typing ? 'typing...' : '@' + otherUser.username}
+                            {typing ? 'typing...' : ''}
                         </Typography>
                     </Box>
                 </Box>
-                <IconButton
+                {/* <IconButton
                     onClick={startPersonalCall}
                     sx={{ position: 'absolute', right: '10px' }}
                 >
@@ -299,7 +299,7 @@ const ChatInterface = ({ mode, otherUser, socketRef, connectSettings }) => {
                             color: 'primary.dark',
                         }}
                     />
-                </IconButton>
+                </IconButton> */}
             </AppBar>
             <Box
                 sx={{

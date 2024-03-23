@@ -31,6 +31,9 @@ const blogSchema = new mongoose.Schema(
             required: [true, 'Author is required'],
             unique: false,
         },
+        tags: {
+            type: [String],
+        },
     },
     {
         timestamps: true,

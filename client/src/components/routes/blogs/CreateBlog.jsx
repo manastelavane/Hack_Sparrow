@@ -9,11 +9,30 @@ import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline';
 import ReactQuill from 'react-quill';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Chip from '@mui/material/Chip';
 import 'react-quill/dist/quill.snow.css';
 import { v4 as uuid } from 'uuid';
 
 import storage from '../../../appwrite';
 import { notifyAction } from '../../../actions/actions';
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 200,
+        },
+    },
+};
+
+const disorders = ['PTSD', 'Depression', 'Anxiety', 'OCD', 'ADHD'];
 
 function CreateBlog() {
     const navigate = useNavigate();
@@ -25,6 +44,18 @@ function CreateBlog() {
     const [buttonStatus, setButtonStatus] = useState(!true);
     const [uploadStatus, setUploadStatus] = useState(null);
     const [coverUrl, setCoverUrl] = useState(null);
+
+    const [disorderTitle, setDisorderTitle] = useState([]);
+
+    const handleChange = (event) => {
+        const {
+            target: { value },
+        } = event;
+        setDisorderTitle(
+            // On autofill we get a stringified value.
+            typeof value === 'string' ? value.split(',') : value
+        );
+    };
 
     const modules = {
         toolbar: [
@@ -86,6 +117,7 @@ function CreateBlog() {
             summary,
             content,
             cover: coverUrl,
+            tags: disorderTitle,
         };
         try {
             const response = await axios({
@@ -134,6 +166,7 @@ function CreateBlog() {
                 sx={{
                     p: 2,
                     mt: 2,
+                    mb: 12,
                     backgroundColor: 'secondary.light',
                     boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.3)',
                     border: 'none',
@@ -263,13 +296,51 @@ function CreateBlog() {
                             onChange={(newValue) => setContent(newValue)}
                         />
                     </Box>
-
+                    <FormControl sx={{ m: 1, width: 600 }}>
+                        <InputLabel id='demo-multiple-chip-label'>
+                            Tags
+                        </InputLabel>
+                        <Select
+                            labelId='demo-multiple-chip-label'
+                            id='demo-multiple-chip'
+                            multiple
+                            value={disorderTitle}
+                            onChange={handleChange}
+                            input={
+                                <OutlinedInput
+                                    id='select-multiple-chip'
+                                    label='Tags'
+                                />
+                            }
+                            renderValue={(selected) => (
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        flexWrap: 'wrap',
+                                        gap: 0.5,
+                                    }}
+                                >
+                                    {selected.map((value) => (
+                                        <Chip key={value} label={value} />
+                                    ))}
+                                </Box>
+                            )}
+                            MenuProps={MenuProps}
+                        >
+                            {disorders.map((disorder) => (
+                                <MenuItem key={disorder} value={disorder}>
+                                    {disorder}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                    <br />
                     <Button
                         color='primary'
                         variant='contained'
                         type='submit'
                         disabled={buttonStatus}
-                        sx={{ borderRadius: '10px' }}
+                        sx={{ borderRadius: '10px', my: 3 }}
                     >
                         Create Post
                     </Button>

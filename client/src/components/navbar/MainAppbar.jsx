@@ -89,7 +89,8 @@ function MainAppbar({
     );
 
     const [avatarURL, setAvatarURL] = useState(currentUser?.photoURL);
-    const [name, setName] = useState(currentUser?.name);
+    const [bio, setBio] = useState(currentUser?.bio);
+    const [username, setUsername] = useState(currentUser?.username);
     const [buttonStatus, setButtonStatus] = useState(true);
 
     // const onInstallClick = () => {
@@ -148,8 +149,13 @@ function MainAppbar({
         setAnchorEl(null);
     };
 
-    const handleNameChange = (event) => {
-        setName(event.target.value);
+    const handleBioChange = (event) => {
+        setBio(event.target.value);
+        setButtonStatus(false);
+    };
+
+    const handleUsernameChange = (event) => {
+        setUsername(event.target.value);
         setButtonStatus(false);
     };
 
@@ -188,7 +194,7 @@ function MainAppbar({
     };
 
     const saveChanges = async () => {
-        if (!avatarURL || !name) {
+        if (!avatarURL || !bio || !username) {
             alert('Name cannot be empty');
             return;
         }
@@ -201,7 +207,8 @@ function MainAppbar({
                 newURL = await uploadFile(imageFile);
             }
             const data = {
-                name,
+                updatedUsername: username,
+                bio,
                 photoURL: newURL,
                 socialLinks: {
                     twitter: twitterProfile,
@@ -218,7 +225,7 @@ function MainAppbar({
                 data,
             });
             setButtonStatus(true);
-            setName(result.data.result.name);
+            setBio(result.data.result.bio);
             setAvatarURL(result.data.result.photoURL);
             setTwitterProfile(
                 result.data.result.socialLinks.twitter.toString()
@@ -231,10 +238,15 @@ function MainAppbar({
                     true,
                     result.data.result.uid,
                     result.data.result.email,
-                    result.data.result.name,
+                    result.data.result.bio,
                     result.data.result.photoURL,
+                    result.data.result.name,
                     result.data.result.username,
                     result.data.result.socialLinks,
+                    result.data.result.testResults,
+                    result.data.result.isPrivacyAccepted,
+                    result.data.result.reportedBy,
+                    result.data.result._id,
                     result.data.result.token
                 )
             );
@@ -263,7 +275,8 @@ function MainAppbar({
 
     const handleModalClose = () => {
         setModalVisible(false);
-        setName(currentUser.name);
+        setBio(currentUser.bio);
+        setUsername(currentUser.username);
         setAvatarURL(currentUser.photoURL);
         setTwitterProfile(currentUser.socialLinks.twitter);
         setInstagramProfile(currentUser.socialLinks.instagram);
@@ -330,7 +343,7 @@ function MainAppbar({
                     </CustomSwitcherGroup>
                     <IconButton sx={{ p: '6px' }} onClick={handleMenuClick}>
                         <Avatar
-                            alt={currentUser.name.charAt(0).toUpperCase()}
+                            alt={currentUser.username.charAt(0).toUpperCase()}
                             src={currentUser.photoURL}
                             sx={{
                                 bgcolor: 'primary.light',
@@ -340,7 +353,7 @@ function MainAppbar({
                                 border: '2px solid',
                             }}
                         >
-                            {currentUser.name.charAt(0).toUpperCase()}
+                            {currentUser.username.charAt(0).toUpperCase()}
                         </Avatar>
                     </IconButton>
                     <Menu
@@ -468,7 +481,7 @@ function MainAppbar({
                                     }}
                                 >
                                     <Avatar
-                                        alt={currentUser.name
+                                        alt={currentUser.username
                                             .charAt(0)
                                             .toUpperCase()}
                                         src={avatarURL}
@@ -480,7 +493,7 @@ function MainAppbar({
                                             border: '2px solid',
                                         }}
                                     >
-                                        {currentUser.name
+                                        {currentUser.username
                                             .charAt(0)
                                             .toUpperCase()}
                                     </Avatar>
@@ -524,18 +537,23 @@ function MainAppbar({
                                     }}
                                 >
                                     <TextField
-                                        label='Name'
+                                        label='Username'
                                         color='success'
                                         variant='outlined'
-                                        value={name}
-                                        onChange={handleNameChange}
-                                    />
-                                    <Typography
-                                        variant='subtitle1'
-                                        sx={{ mt: 2 }}
+                                        value={username}
+                                        onChange={handleUsernameChange}
                                     >
-                                        Username - {currentUser.username}
-                                    </Typography>
+                                        {currentUser.username}
+                                    </TextField>
+                                    <br />
+                                    <TextField
+                                        label='Bio'
+                                        color='success'
+                                        variant='outlined'
+                                        value={bio}
+                                        onChange={handleBioChange}
+                                        fullWidth
+                                    />
                                 </Box>
                             </Box>
                             <Box

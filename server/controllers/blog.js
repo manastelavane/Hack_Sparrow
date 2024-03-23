@@ -1,4 +1,5 @@
 const BlogModel = require('../models/blogModel');
+const UserModel = require('../models/userModel');
 const axios = require('axios');
 
 exports.createBlog = async (req, res) => {
@@ -63,16 +64,44 @@ exports.createBlog = async (req, res) => {
 exports.getBlogs = async (req, res) => {
     try {
         const PAGE_SIZE = 6;
+        const filter = req.query.filter;
         let skip = req.query.page ? parseInt(req.query.page) : 0;
-        const result = await BlogModel.find()
-            .sort({ createdAt: -1 })
-            .skip(skip * PAGE_SIZE)
-            .limit(PAGE_SIZE);
-        res.status(200).json({
-            success: true,
-            result,
-            message: '6 blogs fetched',
-        });
+        console.log(filter);
+        console.log(skip);
+        if (filter == 1) {
+            const result = await BlogModel.find()
+                .sort({ createdAt: -1 })
+                .skip(skip * PAGE_SIZE)
+                .limit(PAGE_SIZE);
+            res.status(200).json({
+                success: true,
+                result,
+                message: '6 latest blogs fetched',
+            });
+        } else {
+            const uid = req.query.uid;
+            const user = await UserModel.findOne({ uid: uid });
+            if (!user) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'User not found',
+                });
+            }
+            const testResults = user.testResults;
+            const maxTest = Object.keys(testResults).reduce((a, b) =>
+                testResults[a] > testResults[b] ? a : b
+            );
+            console.log(maxTest);
+            const result = await BlogModel.find({ tags: maxTest })
+                .sort({ createdAt: -1 })
+                .skip(skip * PAGE_SIZE)
+                .limit(PAGE_SIZE);
+            res.status(200).json({
+                success: true,
+                result,
+                message: '6 latest blogs fetched',
+            });
+        }
     } catch (error) {
         res.status(500).json({
             success: false,

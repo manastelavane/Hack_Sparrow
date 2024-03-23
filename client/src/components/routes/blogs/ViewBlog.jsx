@@ -112,7 +112,7 @@ function ViewBlog() {
                 text:
                     blog?.title +
                     ' by ' +
-                    blog?.authorName +
+                    blog?.authorUsername +
                     ' on ' +
                     blog?.createdAt.split('T')[0] +
                     ' ' +
@@ -167,7 +167,7 @@ function ViewBlog() {
                             }}
                         >
                             by{' '}
-                            {`${blog?.authorName}  on   ${
+                            {`${blog?.authorUsername}  on   ${
                                 blog?.createdAt.split('T')[0]
                             }`}
                         </Typography>

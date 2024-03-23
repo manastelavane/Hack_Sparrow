@@ -61,18 +61,34 @@ function App() {
         const auth = JSON.parse(token);
         if (auth?.isSignedIn) {
             const { dnd } = auth;
-            const { uid, email, name, photoURL, username, socialLinks } =
-                jwtDecode(dnd);
+            const {
+                uid,
+                email,
+                bio,
+                photoURL,
+                name,
+                username,
+                socialLinks,
+                testResults,
+                isPrivacyAccepted,
+                reportedBy,
+                _id,
+            } = jwtDecode(dnd);
             // console.log(uid, email, name, photoURL, username, socialLinks, dnd);
             dispatch(
                 signInAction(
                     true,
                     uid,
                     email,
-                    name,
+                    bio,
                     photoURL,
+                    name,
                     username,
                     socialLinks,
+                    testResults,
+                    isPrivacyAccepted,
+                    reportedBy,
+                    _id,
                     dnd
                 )
             );

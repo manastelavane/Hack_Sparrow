@@ -111,7 +111,7 @@ const SearchUser = ({ mode, handleChatClick }) => {
                     }}
                     InputProps={{
                         endAdornment: (
-                            <Tooltip title='Search for users by typing their name or username'>
+                            <Tooltip title='Search for users by typing their username'>
                                 <InputAdornment position='end'>
                                     <IconButton>
                                         <SearchIcon />
@@ -147,7 +147,7 @@ const SearchUser = ({ mode, handleChatClick }) => {
                                     //     mode === 'light' ? deepDark : medium,
                                 }}
                             >
-                                {user.name[0].toUpperCase()}
+                                {user.username[0].toUpperCase()}
                             </Avatar>
                             <Typography
                                 sx={{
@@ -155,10 +155,10 @@ const SearchUser = ({ mode, handleChatClick }) => {
                                     ml: 2,
                                 }}
                             >
-                                {user.name}
+                                {user.username}
                             </Typography>
                             <Tooltip
-                                title={`View ${user.name}'s Profile`}
+                                title={`View ${user.username}'s Profile`}
                                 placement='bottom'
                             >
                                 <IconButton
@@ -176,7 +176,7 @@ const SearchUser = ({ mode, handleChatClick }) => {
                                 </IconButton>
                             </Tooltip>
                             <Tooltip
-                                title={`Start a conversation with ${user.name}`}
+                                title={`Start a conversation with ${user.username}`}
                                 placement='right'
                             >
                                 <IconButton

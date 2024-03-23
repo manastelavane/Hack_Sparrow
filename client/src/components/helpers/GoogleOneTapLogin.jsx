@@ -49,6 +49,7 @@ const GoogleOneTapLogin = () => {
                         twitter: '',
                         instagram: '',
                     },
+                    bio: '',
                 },
                 config
             )
@@ -59,10 +60,15 @@ const GoogleOneTapLogin = () => {
                         true,
                         user.uid,
                         user.email,
-                        user.name,
+                        user.bio,
                         user.photoURL,
+                        user.name,
                         user.username,
                         user.socialLinks,
+                        user.testResults,
+                        user.isPrivacyAccepted,
+                        user.reportedBy,
+                        user._id,
                         user.token
                     )
                 );

@@ -86,7 +86,7 @@ const PersonalCall = ({ mode }) => {
             toggleAudio();
             socketRef.current.emit('join_room', {
                 roomId,
-                name: currentUser.name,
+                username: currentUser.username,
             });
         } catch (error) {
             console.error(error);
@@ -224,7 +224,7 @@ const PersonalCall = ({ mode }) => {
                     notifyAction(
                         true,
                         'success',
-                        `${user.name} has left the call`
+                        `${user.username} has left the call`
                     )
                 );
             });
@@ -284,7 +284,7 @@ const PersonalCall = ({ mode }) => {
                             color: mode === 'light' ? 'white' : 'text.primary',
                         }}
                     >
-                        {currentUser.name}
+                        {currentUser.username}
                     </Typography>
                     <video
                         style={{
@@ -329,7 +329,7 @@ const PersonalCall = ({ mode }) => {
                                     mode === 'light' ? 'white' : 'text.primary',
                             }}
                         >
-                            {remoteUser?.name}
+                            {remoteUser?.username}
                         </Typography>
                         <video
                             id='remotevideo'

@@ -21,10 +21,15 @@ export const signInAction = (
     isSignedIn,
     uid,
     email,
-    name,
+    bio,
     photoURL,
+    name,
     username,
     socialLinks,
+    testResults,
+    isPrivacyAccepted,
+    reportedBy,
+    _id,
     token
 ) => {
     return {
@@ -33,10 +38,15 @@ export const signInAction = (
             isSignedIn,
             uid,
             email,
-            name,
+            bio,
             photoURL,
+            name,
             username,
             socialLinks,
+            testResults,
+            isPrivacyAccepted,
+            reportedBy,
+            _id,
             token,
         },
     };

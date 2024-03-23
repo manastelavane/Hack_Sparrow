@@ -4,10 +4,21 @@ const INITIAL_STATE = {
     isSignedIn: false,
     uid: null,
     email: null,
-    name: null,
+    bio: null,
     photoURL: null,
+    name: null,
     username: null,
     socialLinks: null,
+    testResults: {
+        ocd: 0,
+        adhd: 0,
+        ptsd: 0,
+        anxiety: 0,
+        depression: 0,
+    },
+    isPrivacyAccepted: false,
+    reportedBy: [],
+    _id: null,
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
@@ -23,10 +34,15 @@ const authReducer = (state = INITIAL_STATE, action) => {
                 isSignedIn: true,
                 uid: action.payload.uid,
                 email: action.payload.email,
-                name: action.payload.name,
+                bio: action.payload.bio,
                 photoURL: action.payload.photoURL,
+                name: action.payload.name,
                 username: action.payload.username,
                 socialLinks: action.payload.socialLinks,
+                testResults: action.payload.testResults,
+                isPrivacyAccepted: action.payload.isPrivacyAccepted,
+                reportedBy: action.payload.reportedBy,
+                _id: action.payload._id,
             };
 
         case SIGN_OUT:
@@ -36,10 +52,21 @@ const authReducer = (state = INITIAL_STATE, action) => {
                 isSignedIn: false,
                 uid: null,
                 email: null,
-                name: null,
+                bio: null,
                 photoURL: null,
+                name: null,
                 username: null,
                 socialLinks: null,
+                testResults: {
+                    ocd: 0,
+                    adhd: 0,
+                    ptsd: 0,
+                    anxiety: 0,
+                    depression: 0,
+                },
+                isPrivacyAccepted: false,
+                reportedBy: [],
+                _id: null,
             };
 
         default:

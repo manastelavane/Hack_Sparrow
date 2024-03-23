@@ -16,7 +16,7 @@ exports.googleSignUp = async (req, res) => {
             res.status(200).json({
                 success: 'true',
                 result: { ...oldUser._doc, token },
-                message: 'User already exists',
+                message: 'User alreadytoken exists',
             });
         } else {
             const user = await UserModel.create({
@@ -52,8 +52,14 @@ exports.googleSignUp = async (req, res) => {
 
 exports.editProfile = async (req, res) => {
     try {
-        const { uid, email, username } = req.user;
-        const { name, photoURL, socialLinks, updatedUsername, isPrivacyAccepted } = req.body;
+        const { uid } = req.user;
+        const {
+            bio,
+            photoURL,
+            socialLinks,
+            updatedUsername,
+            isPrivacyAccepted,
+        } = req.body;
         const user = await UserModel.findOne({ uid });
         if (!user) {
             res.status(404).json({
@@ -61,17 +67,23 @@ exports.editProfile = async (req, res) => {
                 message: 'User not found',
             });
         }
+        const updatedUser = await UserModel.findOneAndUpdate(
+            { uid },
+            {
+                bio,
+                photoURL,
+                socialLinks,
+                username: updatedUsername,
+                isPrivacyAccepted,
+            },
+            { new: true }
+        );
         const token = jwt.sign(
-            { uid, email, name, photoURL, username, socialLinks, isPrivacyAccepted },
+            { ...updatedUser._doc },
             process.env.HMS_SECRET_APP,
             {
                 expiresIn: '48h',
             }
-        );
-        const updatedUser = await UserModel.findOneAndUpdate(
-            { uid },
-            { name, photoURL, socialLinks, username: updatedUsername, isPrivacyAccepted },
-            { new: true }
         );
         res.status(200).json({
             success: true,
@@ -93,11 +105,11 @@ exports.search = async (req, res) => {
         const userId = req.params.userId;
         const keyword = req.query.search
             ? {
-                $or: [
-                    { name: { $regex: req.query.search, $options: 'i' } },
-                    { username: { $regex: req.query.search, $options: 'i' } },
-                ],
-            }
+                  $or: [
+                      { name: { $regex: req.query.search, $options: 'i' } },
+                      { username: { $regex: req.query.search, $options: 'i' } },
+                  ],
+              }
             : {};
         const users = await UserModel.find(keyword).find({
             uid: { $ne: userId },
@@ -106,6 +118,36 @@ exports.search = async (req, res) => {
             success: true,
             result: users,
             message: 'User found',
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Something went wrong',
+            error: error.message,
+        });
+        console.log(error);
+    }
+};
+
+exports.updateTestScore = async (req, res) => {
+    try {
+        const { testScore, uid } = req.body;
+        const user = await UserModel.findOne({ uid });
+        if (!user) {
+            res.status(404).json({
+                success: false,
+                message: 'User not found',
+            });
+        }
+        const updatedUser = await UserModel.findOneAndUpdate(
+            { uid },
+            { testResults: testScore },
+            { new: true }
+        );
+        res.status(200).json({
+            success: true,
+            result: { ...updatedUser._doc },
+            message: 'Test score updated',
         });
     } catch (error) {
         res.status(500).json({

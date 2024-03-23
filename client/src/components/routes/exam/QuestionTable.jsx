@@ -13,6 +13,7 @@ import {
     Button,
     TableRow,
 } from '@mui/material';
+import axios from 'axios';
 
 import { Radar } from 'react-chartjs-2';
 import {
@@ -79,12 +80,12 @@ function QuestionTable() {
         },
     };
 
-    const formSubmitHandler = () => {
+    const formSubmitHandler = async () => {
         const values = Object.values(selectedOption);
-        if (values.includes(null)) {
-            alert('Please answer all the questions');
-            return;
-        }
+        // if (values.includes(null)) {
+        //     alert('Please answer all the questions');
+        //     return;
+        // }
         let ocd = 0,
             adhd = 0,
             depression = 0,
@@ -103,6 +104,7 @@ function QuestionTable() {
                 ptsd += selectedOption[i + 1];
             }
         }
+        console.log(ocd, adhd, depression, anxiety, ptsd);
         ocd = Math.round(ocd / 5);
         adhd = Math.round(adhd / 5);
         depression = Math.round(depression / 5);
@@ -112,7 +114,7 @@ function QuestionTable() {
             labels: ['OCD', 'ADHD', 'Depression', 'Anxiety', 'PTSD'],
             datasets: [
                 {
-                    label: `${currentUser.name}'s Results`,
+                    label: `${currentUser.username}'s Results`,
                     data: [ocd, adhd, depression, anxiety, ptsd],
                     fill: true,
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
@@ -124,6 +126,58 @@ function QuestionTable() {
                 },
             ],
         });
+        console.log(ocd, adhd, depression, anxiety, ptsd);
+
+        if (ocd === 0) ocd = 0;
+        else if (ocd === 1) ocd = 25;
+        else if (ocd === 2) ocd = 50;
+        else if (ocd === 3) ocd = 75;
+        else if (ocd === 4) ocd = 100;
+
+        if (adhd === 0) adhd = 0;
+        else if (adhd === 1) adhd = 25;
+        else if (adhd === 2) adhd = 50;
+        else if (adhd === 3) adhd = 75;
+        else if (adhd === 4) adhd = 100;
+
+        if (depression === 0) depression = 0;
+        else if (depression === 1) depression = 25;
+        else if (depression === 2) depression = 50;
+        else if (depression === 3) depression = 75;
+        else if (depression === 4) depression = 100;
+
+        if (anxiety === 0) anxiety = 0;
+        else if (anxiety === 1) anxiety = 25;
+        else if (anxiety === 2) anxiety = 50;
+        else if (anxiety === 3) anxiety = 75;
+        else if (anxiety === 4) anxiety = 100;
+
+        if (ptsd === 0) ptsd = 0;
+        else if (ptsd === 1) ptsd = 25;
+        else if (ptsd === 2) ptsd = 50;
+        else if (ptsd === 3) ptsd = 75;
+        else if (ptsd === 4) ptsd = 100;
+
+        console.log(ocd, adhd, depression, anxiety, ptsd);
+
+        try {
+            const response = await axios.post(
+                `${import.meta.env.VITE_SERVER_URL}/api/user/test`,
+                {
+                    testScore: {
+                        ocd,
+                        adhd,
+                        depression,
+                        anxiety,
+                        ptsd,
+                    },
+                    uid: currentUser.uid,
+                }
+            );
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
         ocd = 0;
         adhd = 0;
         depression = 0;

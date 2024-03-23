@@ -205,7 +205,7 @@ const UserChats = ({
                                         ml: 2,
                                     }}
                                 >
-                                    {user.name}
+                                    {user.username}
                                 </Typography>
                                 <Typography
                                     sx={{
