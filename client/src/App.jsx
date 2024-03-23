@@ -34,6 +34,7 @@ import ViewBlog from './components/routes/blogs/ViewBlog';
 import CreateBlog from './components/routes/blogs/CreateBlog';
 import EditBlog from './components/routes/blogs/EditBlog';
 import Exam from './components/routes/exam/Exam';
+import Connect from './components/routes/connect/Connect';
 
 // Themes
 import themes from './utils/themes';
@@ -171,6 +172,14 @@ function App() {
                     element={
                         <ProtectedRoute>
                             <EditBlog />
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/connect'
+                    element={
+                        <ProtectedRoute>
+                            <Connect mode={mode} />
                         </ProtectedRoute>
                     }
                 />
