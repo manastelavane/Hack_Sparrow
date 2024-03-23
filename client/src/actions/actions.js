@@ -18,6 +18,7 @@ export const notifyAction = (open, severity, message) => {
 };
 
 export const signInAction = (
+    isSignedIn,
     uid,
     email,
     name,
@@ -29,6 +30,7 @@ export const signInAction = (
     return {
         type: SIGN_IN,
         payload: {
+            isSignedIn,
             uid,
             email,
             name,

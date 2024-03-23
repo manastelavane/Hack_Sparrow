@@ -52,6 +52,7 @@ const GoogleOneTapLogin = () => {
                 const user = result.data.result;
                 dispatch(
                     signInAction(
+                        true,
                         user.uid,
                         user.email,
                         user.name,

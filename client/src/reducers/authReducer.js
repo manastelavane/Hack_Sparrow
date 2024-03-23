@@ -13,6 +13,7 @@ const INITIAL_STATE = {
 const authReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case SIGN_IN:
+            // console.log(action.payload);
             window.localStorage.setItem(
                 'healthApp',
                 JSON.stringify({ dnd: action.payload.token, isSignedIn: true })

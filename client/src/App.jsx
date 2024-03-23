@@ -1,12 +1,17 @@
 // React
 import { useState, useEffect } from 'react';
+import { jwtDecode } from 'jwt-decode';
 
 // Material UI
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
+//Actions
+import { signInAction } from './actions/actions';
+
 // Redux
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // React Router
 import { Routes, Route } from 'react-router-dom';
@@ -33,6 +38,51 @@ function App() {
     const [promptInstall, setPromptInstall] = useState(null);
 
     const isSignedIn = useSelector((state) => state.auth.isSignedIn);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    useEffect(() => {
+        const handler = (e) => {
+            e.preventDefault();
+            setSupportsPWA(true);
+            setPromptInstall(e);
+        };
+        window.addEventListener('beforeinstallprompt', handler);
+        const token = window.localStorage.getItem('healthApp');
+        // console.log(token);
+        const auth = JSON.parse(token);
+        if (auth?.isSignedIn) {
+            const { dnd } = auth;
+            const { uid, email, name, photoURL, username, socialLinks } =
+                jwtDecode(dnd);
+            // console.log(uid, email, name, photoURL, username, socialLinks, dnd);
+            dispatch(
+                signInAction(
+                    true,
+                    uid,
+                    email,
+                    name,
+                    photoURL,
+                    username,
+                    socialLinks,
+                    dnd
+                )
+            );
+            if (
+                location.pathname.includes('/connect/pc/') ||
+                location.pathname.includes('/blog/')
+            ) {
+                navigate(location.pathname);
+                return;
+            }
+            const value = window.localStorage.getItem('healthAppLastPage');
+            if (value && value !== undefined) {
+                navigate(`/${value}`);
+            } else {
+                navigate('/groups');
+            }
+        }
+        return () => window.removeEventListener('transitionend', handler);
+    }, []);
 
     const localTheme = window.localStorage.getItem('healthAppTheme');
 
