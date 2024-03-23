@@ -27,9 +27,7 @@ import {
     ListItemText,
     IconButton,
     FormControl,
-    InputLabel,
     Select,
-    Stack,
 } from '@mui/material';
 
 // MUI Icons
@@ -43,11 +41,11 @@ import {
     Twitter as TwitterIcon,
     Instagram as InstagramIcon,
     AccountBox as AccountBoxIcon,
-    Download as DownloadIcon,
+    // Download as DownloadIcon,
 } from '@mui/icons-material';
 
 // Appwrite
-// import storage from '../../appwrite';
+import storage from '../../appwrite';
 
 import {
     CustomSwitcherGroup,
@@ -63,16 +61,12 @@ import {
     notifyAction,
 } from '../../actions/actions';
 
-// Props: supportsPWA, promptInstall
-
-import PropTypes from 'prop-types';
-
 function MainAppbar({
     changingTheme,
     mode,
     themeChange,
-    supportsPWA,
-    promptInstall,
+    // supportsPWA,
+    // promptInstall,
 }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -98,39 +92,38 @@ function MainAppbar({
     const [name, setName] = useState(currentUser?.name);
     const [buttonStatus, setButtonStatus] = useState(true);
 
-    const onInstallClick = () => {
-        if (!supportsPWA) {
-            alert(
-                'Either you have already installed the app or your browser does not support PWA :('
-            );
-            return;
-        }
-        promptInstall.prompt();
-    };
+    // const onInstallClick = () => {
+    //     if (!supportsPWA) {
+    //         alert(
+    //             'Either you have already installed the app or your browser does not support PWA :('
+    //         );
+    //         return;
+    //     }
+    //     promptInstall.prompt();
+    // };
 
-    const renderInstallOption = () => {
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            return;
-        } else {
-            return (
-                <MenuItem
-                    onClick={() => {
-                        onInstallClick();
-                        handleMenuClose();
-                    }}
-                >
-                    <DownloadIcon
-                        sx={{
-                            color: 'primary.main',
-                            fontSize: '1.7rem',
-                            ml: -0.5,
-                        }}
-                    />
-                    <ListItemText sx={{ ml: 1 }} primary='Install' />
-                </MenuItem>
-            );
-        }
-    };
+    // const renderInstallOption = () => {
+    //     if (window.matchMedia('(display-mode: standalone)').matches) {
+    //         return;
+    //     } else {
+    //         return (
+    //             <MenuItem
+    //                 onClick={() => {
+    //                     onInstallClick();
+    //                     handleMenuClose();
+    //                 }}
+    //             >
+    //                 <DownloadIcon
+    //                     sx={{
+    //                         fontSize: '1.7rem',
+    //                         ml: -0.5,
+    //                     }}
+    //                 />
+    //                 <ListItemText sx={{ ml: 1 }} primary='Install' />
+    //             </MenuItem>
+    //         );
+    //     }
+    // };
 
     const handleSignOut = () => {
         const choice = window.confirm('Please click on OK to Log Out.');
@@ -205,7 +198,7 @@ function MainAppbar({
             dispatch(startLoadingAction());
             let newURL = avatarURL;
             if (imageFile !== null) {
-                // newURL = await uploadFile(imageFile);
+                newURL = await uploadFile(imageFile);
             }
             const data = {
                 name,
@@ -227,10 +220,15 @@ function MainAppbar({
             setButtonStatus(true);
             setName(result.data.result.name);
             setAvatarURL(result.data.result.photoURL);
-            setTwitterProfile(result.data.result.socialLinks.twitter);
-            setInstagramProfile(result.data.result.socialLinks.instagram);
+            setTwitterProfile(
+                result.data.result.socialLinks.twitter.toString()
+            );
+            setInstagramProfile(
+                result.data.result.socialLinks.instagram.toString()
+            );
             dispatch(
                 signInAction(
+                    true,
                     result.data.result.uid,
                     result.data.result.email,
                     result.data.result.name,
@@ -249,19 +247,19 @@ function MainAppbar({
         }
     };
 
-    // const uploadFile = async (file) => {
-    //     const id = uuid();
-    //     await storage.createFile(
-    //         import.meta.env.VITE_APPWRITE_BUCKET_ID,
-    //         id,
-    //         file
-    //     );
-    //     const result = storage.getFilePreview(
-    //         import.meta.env.VITE_APPWRITE_BUCKET_ID,
-    //         id
-    //     );
-    //     return result;
-    // };
+    const uploadFile = async (file) => {
+        const id = uuid();
+        await storage.createFile(
+            import.meta.env.VITE_APPWRITE_BUCKET_ID,
+            id,
+            file
+        );
+        const result = storage.getFilePreview(
+            import.meta.env.VITE_APPWRITE_BUCKET_ID,
+            id
+        );
+        return result;
+    };
 
     const handleModalClose = () => {
         setModalVisible(false);

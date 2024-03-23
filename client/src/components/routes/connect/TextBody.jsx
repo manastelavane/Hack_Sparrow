@@ -82,7 +82,7 @@ const TextBody = ({ message, endRef }) => {
                               backgroundColor: 'primary.dark',
                           }
                         : {
-                              backgroundColor: 'secondary.main',
+                              backgroundColor: 'secondary.dark',
                               borderBottomLeftRadius: '2px',
                           }),
                     ...(isImage
@@ -198,12 +198,7 @@ const TextBody = ({ message, endRef }) => {
                                             }
                                             sx={{
                                                 fontFamily: 'Helvetica',
-                                                ...(currentUser.uid ===
-                                                message.senderId
-                                                    ? {
-                                                          color: '#00f6ff',
-                                                      }
-                                                    : { color: '#1769e3' }),
+                                                color: 'inherit',
                                                 textDecoration: 'underline',
                                             }}
                                         >

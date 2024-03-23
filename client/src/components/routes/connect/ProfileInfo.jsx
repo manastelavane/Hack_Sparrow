@@ -6,10 +6,13 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import { Stack, Link } from '@mui/material';
 
 // import { otherUser } from './Connect';
 
-const ProfileInfo = ({ mode, otherUser, setProfileInfoOpen }) => {
+const ProfileInfo = ({ otherUser, setProfileInfoOpen }) => {
+    console.log(otherUser);
+
     return (
         <Box
             sx={{
@@ -19,7 +22,7 @@ const ProfileInfo = ({ mode, otherUser, setProfileInfoOpen }) => {
                 transform: 'translate(-50%, -50%)',
                 minWidth: 600,
                 maxHeight: '700px',
-                // backgroundColor: mode === 'light' ? light : bluegrey,
+                backgroundColor: 'primary.main',
                 boxShadow: 24,
                 borderRadius: '10px',
                 py: 2,
@@ -41,7 +44,6 @@ const ProfileInfo = ({ mode, otherUser, setProfileInfoOpen }) => {
                 <Typography
                     variant='h5'
                     sx={{
-                        // color: mode === 'light' ? deepDark : light,
                         fontWeight: 'bold',
                     }}
                 >
@@ -63,7 +65,7 @@ const ProfileInfo = ({ mode, otherUser, setProfileInfoOpen }) => {
                     alignItems: 'center',
                     justifyContent: 'space-around',
                     width: '100%',
-                    pt: 4,
+                    py: 4,
                 }}
             >
                 <Box
@@ -77,11 +79,10 @@ const ProfileInfo = ({ mode, otherUser, setProfileInfoOpen }) => {
                         alt={otherUser?.name.charAt(0).toUpperCase()}
                         src={otherUser?.photoURL}
                         sx={{
-                            // bgcolor: mode === 'light' ? deepDark : light,
-                            // color: mode === 'light' ? light : deepDark,
                             height: 150,
                             width: 150,
                             border: '2px solid',
+                            top: 0,
                         }}
                     >
                         {otherUser?.name.charAt(0).toUpperCase()}
@@ -94,60 +95,62 @@ const ProfileInfo = ({ mode, otherUser, setProfileInfoOpen }) => {
                         flexDirection: 'column',
                     }}
                 >
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            flexWrap: 'wrap',
-                            alignItems: 'end',
-                        }}
-                    >
-                        <Typography
-                            variant='subtitle1'
-                            sx={{
-                                mr: 1,
-                                // color: mode === 'light' ? deepDark : light,
-                            }}
-                        >
-                            Name -
-                        </Typography>
-                        <Chip
-                            sx={{
-                                fontSize: '1rem',
-                            }}
-                            label={otherUser?.name}
-                            color='success'
-                            size='medium'
-                        />
-                    </Box>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            flexWrap: 'wrap',
-                            alignItems: 'end',
-                            mt: 2,
-                        }}
-                    >
-                        <Typography
-                            variant='subtitle1'
-                            sx={{
-                                mt: 2,
-                                mr: 1,
-                                // color: mode === 'light' ? deepDark : light,
-                            }}
-                        >
-                            Username -
-                        </Typography>
-                        <Chip
-                            sx={{
-                                fontSize: '1rem',
-                            }}
-                            label={otherUser?.username}
-                            color='success'
-                            size='medium'
-                        />
-                    </Box>
+                    <Stack spacing={2}>
+                        <Stack direction='row' alignItems='center' spacing={1}>
+                            <Typography variant='subtitle1'>Name -</Typography>
+                            <Chip
+                                label={otherUser?.name}
+                                color='success'
+                                size='medium'
+                            />
+                        </Stack>
+                        <Stack direction='row' alignItems='center' spacing={1}>
+                            <Typography variant='subtitle1'>
+                                Username -
+                            </Typography>
+                            <Chip
+                                label={otherUser?.username}
+                                color='success'
+                                size='medium'
+                            />
+                        </Stack>
+                        {otherUser?.socialLinks?.twitter && (
+                            <Stack
+                                direction='row'
+                                alignItems='center'
+                                spacing={1}
+                            >
+                                <Typography variant='subtitle1'>
+                                    Twitter -
+                                </Typography>
+                                <Link
+                                    href={otherUser.socialLinks.twitter}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                >
+                                    <TwitterIcon />
+                                </Link>
+                            </Stack>
+                        )}
+                        {otherUser?.socialLinks?.instagram && (
+                            <Stack
+                                direction='row'
+                                alignItems='center'
+                                spacing={1}
+                            >
+                                <Typography variant='subtitle1'>
+                                    Instagram -
+                                </Typography>
+                                <Link
+                                    href={otherUser.socialLinks.instagram}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                >
+                                    <InstagramIcon />
+                                </Link>
+                            </Stack>
+                        )}
+                    </Stack>
                 </Box>
             </Box>
             {(otherUser?.socialLinks?.twitter !== '' ||
