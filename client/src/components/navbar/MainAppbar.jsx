@@ -68,6 +68,7 @@ import {
 import PropTypes from 'prop-types';
 
 MainAppbar.propTypes = {
+    mode: PropTypes.string,
     supportsPWA: PropTypes.bool,
     promptInstall: PropTypes.func,
     themeChange: PropTypes.func,

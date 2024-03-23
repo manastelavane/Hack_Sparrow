@@ -9,6 +9,7 @@ const userRouter = require('./routes/user.js');
 const blogsRouter = require('./routes/blog.js');
 const roomsRouter = require('./routes/room.js');
 const chatRouter = require('./routes/chat.js');
+const messageRouter = require('./routes/message.js');
 
 const app = express();
 dotenv.config();
@@ -26,9 +27,10 @@ app.use((req, res, next) => {
 app.use(express.json({ limit: '10MB' }));
 
 app.use('/api/user', userRouter);
+app.use('/api/rooms', roomsRouter);
 app.use('/api/blog', blogsRouter);
 app.use('/api/chat', chatRouter);
-app.use('/api/rooms', roomsRouter);
+app.use('/api/message', messageRouter);
 
 app.get('/mtoken', (req, res) => {
     var app_access_key = process.env.HMS_ACCESS_KEY;
