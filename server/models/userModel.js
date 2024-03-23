@@ -23,9 +23,8 @@ const userSchema = new mongoose.Schema(
             required: [true, 'Please Enter Your Email'],
             unique: true,
         },
-        name: {
+        bio: {
             type: String,
-            required: true,
         },
         photoURL: {
             type: String,
@@ -35,7 +34,38 @@ const userSchema = new mongoose.Schema(
             required: [true, 'Please Enter Your Username'],
             unique: true,
         },
+        isPrivacyAccepted: {
+            type: Boolean,
+            default: false,
+        },
+        reportedBy: [
+            {
+                type: String,
+            },
+        ],
         socialLinks: socialLinksSchema,
+        testResults: {
+            ocd: {
+                type: Number,
+                default: 0,
+            },
+            adhd: {
+                type: Number,
+                default: 0,
+            },
+            ptsd: {
+                type: Number,
+                default: 0,
+            },
+            anxiety: {
+                type: Number,
+                default: 0,
+            },
+            depression: {
+                type: Number,
+                default: 0,
+            },
+        },
     },
     { timestamps: true }
 );

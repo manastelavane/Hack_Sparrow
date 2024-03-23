@@ -1,4 +1,5 @@
 const BlogModel = require('../models/blogModel');
+const axios = require('axios');
 
 exports.createBlog = async (req, res) => {
     const { title, summary, content, cover } = req.body;
@@ -7,21 +8,48 @@ exports.createBlog = async (req, res) => {
         name: authorName,
         username: authorUsername,
     } = req.user;
+
     try {
-        const result = await BlogModel.create({
-            title,
-            summary,
-            content,
-            cover,
-            authorId,
-            authorName,
-            authorUsername,
-        });
-        res.status(201).json({
-            success: true,
-            result,
-            message: 'Blog created',
-        });
+        // Send the blog content to the sentiment analysis server
+        const completeText = title + ' ' + summary + ' ' + content;
+        // console.log(completeText);
+        const sentimentResponse = await axios.post(
+            'http://127.0.0.1:5000/analyze-sentiment',
+            {
+                blog: String(completeText), // You may want to analyze the 'content' of the blog
+            }
+        );
+        // console.log(sentimentResponse.data);
+
+        // Extract sentiment score from the response
+        const sentimentScore = sentimentResponse.data.sentiment;
+
+        // Check if sentiment is positive (you can adjust this logic based on your requirements)
+        if (sentimentScore >= 0) {
+            // Create the blog if sentiment is positive
+            const result = await BlogModel.create({
+                title,
+                summary,
+                content,
+                cover,
+                authorId,
+                authorName,
+                authorUsername,
+            });
+
+            res.status(201).json({
+                success: true,
+                result,
+                message: 'Blog created',
+            });
+        } else {
+            // If sentiment is negative, do not create the blog
+            res.status(400).json({
+                success: false,
+                message:
+                    'Blog content has negative sentiment. Cannot create the blog.',
+            });
+        }
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -92,12 +120,34 @@ exports.editBlogById = async (req, res) => {
                 message: 'You are not authorized to update this blog',
             });
         }
-        await blog.updateOne(update);
-        res.status(200).json({
-            success: true,
-            blog,
-            message: 'Blog updated',
-        });
+
+        // Send the updated blog content to the sentiment analysis server
+        const completeText = title + ' ' + summary + ' ' + content;
+        const sentimentResponse = await axios.post(
+            'http://127.0.0.1:5000/analyze-sentiment',
+            {
+                blog: String(completeText),
+            }
+        );
+        const sentimentScore = sentimentResponse.data.sentiment;
+
+        // Check if sentiment is positive
+        if (sentimentScore >= 0) {
+            // Update the blog if sentiment is positive
+            await blog.updateOne(update);
+            res.status(200).json({
+                success: true,
+                blog,
+                message: 'Blog updated',
+            });
+        } else {
+            // If sentiment is negative, do not update the blog
+            res.status(400).json({
+                success: false,
+                message:
+                    'Blog content has negative sentiment. Cannot update the blog.',
+            });
+        }
     } catch (error) {
         res.status(500).json({
             success: false,

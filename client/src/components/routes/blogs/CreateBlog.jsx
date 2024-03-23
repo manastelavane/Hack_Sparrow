@@ -111,7 +111,8 @@ function CreateBlog() {
                 notifyAction(
                     true,
                     'error',
-                    'It seems something is wrong, please log out and log in again. later :('
+                    error.response.data.message ||
+                        'It seems something is wrong, please log out and log in again. later :('
                 )
             );
         }
