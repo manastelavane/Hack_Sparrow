@@ -18,7 +18,6 @@ import {
     selectPeers,
 } from '@100mslive/hms-video-react';
 
-// import { bluegrey, light, deepDark } from '../utils/colors';
 import PeerInRoom from './PeerInRoom';
 
 const VoiceRoom = ({ mode }) => {
@@ -56,8 +55,7 @@ const VoiceRoom = ({ mode }) => {
         <Box
             sx={{
                 height: '100vh',
-                // backgroundColor: mode === 'light' ? light : bluegrey,
-                color: 'text.primary',
+                backgroundColor: 'background.paper',
                 px: '5rem',
                 pt: '5rem',
                 display: 'flex',
@@ -68,7 +66,7 @@ const VoiceRoom = ({ mode }) => {
             <Paper
                 sx={{
                     p: 2,
-                    // backgroundColor: deepDark,
+                    backgroundColor: 'secondary.light',
                     height: 'calc(100vh - 170px)',
                     width: '100%',
                     mb: '1rem',

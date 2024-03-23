@@ -79,11 +79,10 @@ const TextBody = ({ message, endRef }) => {
                               alignSelf: 'flex-end',
                               borderBottomLeftRadius: '20px',
                               borderBottomRightRadius: '1px',
-                              //   backgroundColor: deepDark,
+                              backgroundColor: 'primary.dark',
                           }
                         : {
-                              //   backgroundColor: medium,
-                              //   color: bluegrey,
+                              backgroundColor: 'secondary.main',
                               borderBottomLeftRadius: '2px',
                           }),
                     ...(isImage
@@ -111,7 +110,7 @@ const TextBody = ({ message, endRef }) => {
                             maxWidth: '80%',
                             height: 'auto',
                             maxHeight: '460px',
-                            // backgroundColor: deepDark,
+                            backgroundColor: 'primary.dark',
                             boxShadow: 24,
                             borderRadius: '10px',
                             p: 2,
@@ -126,6 +125,7 @@ const TextBody = ({ message, endRef }) => {
                                 position: 'absolute',
                                 top: 10,
                                 right: 10,
+                                color: 'secondary.contrastText',
                             }}
                             cursor='pointer'
                             onClick={handleImgModal}
@@ -245,7 +245,7 @@ const TextBody = ({ message, endRef }) => {
                         mb: '-5px',
                         alignSelf: 'flex-end',
                         ...(currentUser.uid !== message.senderId && {
-                            color: 'black',
+                            color: 'background.paper',
                         }),
                     }}
                 >

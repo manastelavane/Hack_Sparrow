@@ -135,7 +135,7 @@ const UserChats = ({
     }, [socketRef, otherUser]);
 
     return (
-        <List sx={{ p: 0 }}>
+        <List sx={{ p: 0, backgroundColor: 'background.paper' }}>
             {userChats.length > 0 &&
                 userChats
                     .sort((a, b) =>
@@ -152,10 +152,7 @@ const UserChats = ({
                                 p: 0,
                                 pl: 2,
                                 height: '70px',
-                                borderBottom:
-                                    mode === 'light'
-                                        ? '1px solid rgba(0, 0, 0, 0.12)'
-                                        : '1px solid rgba(255, 255, 255, 0.12)',
+                                borderBottom: '1px solid rgba(0, 0, 0, 0.12)',
                             }}
                             onClick={() => {
                                 setMessageNotSeen((prev) => {

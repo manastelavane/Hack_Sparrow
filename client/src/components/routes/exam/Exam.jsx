@@ -16,7 +16,7 @@ function Exam() {
                 mt: '75px',
                 height: 'calc(100vh - 75px)',
                 maxHeight: 'calc(100vh - 75px)',
-                backgroundColor: 'palette.background.default',
+                backgroundColor: 'background.paper',
                 padding: '5rem',
                 pt: 0,
             }}
@@ -25,7 +25,7 @@ function Exam() {
                 variant='h1'
                 component='h2'
                 sx={{
-                    color: 'palette.text.primary',
+                    color: 'secondary.main',
                     margin: '2rem',
                     fontWeight: 'bold',
                     fontSize: '3rem',
@@ -42,7 +42,7 @@ function Exam() {
                 variant='h2'
                 component='h3'
                 sx={{
-                    color: 'palette.text.secondary',
+                    color: 'secondary.dark',
                     margin: '2rem',
                     fontFamily: 'Work Sans',
                     fontWeight: 'medium',
@@ -62,8 +62,8 @@ function Exam() {
                     flexDirection: 'column',
                     padding: '2rem',
                     my: '2rem',
-                    backgroundColor: 'success.light',
-                    color: 'secondary.main',
+                    backgroundColor: 'primary.light',
+                    color: 'primary.dark',
                     fontSize: '1.1rem',
                     borderRadius: '15px',
                     border: `1px solid ${'primary.main'}`,

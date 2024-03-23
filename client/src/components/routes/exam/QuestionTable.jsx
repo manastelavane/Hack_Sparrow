@@ -282,19 +282,13 @@ function QuestionTable() {
                 </TableBody>
             </Table>
             <Button
-                color='success'
+                color='secondary'
                 variant='contained'
                 sx={{
                     p: 1,
                     px: 4,
                     mt: 3,
-                    backgroundColor: 'primary.light',
-                    color: 'primary.main',
                     font: '500 1.2rem Poppins, sans-serif',
-                    ':hover': {
-                        backgroundColor: 'secondary.medium',
-                        color: 'black',
-                    },
                     borderRadius: '15px',
                     textTransform: 'none',
                 }}

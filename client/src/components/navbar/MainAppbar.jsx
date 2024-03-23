@@ -288,19 +288,16 @@ function MainAppbar({
                 top: '0',
             }}
         >
-            <Stack direction='row' alignItems='center'>
-                <img
-                    src={'/assets/vectors/logo-800x800.svg'}
-                    alt='chat'
-                    style={{
-                        width: '50px',
-                        height: '50px',
-                        borderRadius: '50%',
-                        marginRight: '1rem',
-                    }}
-                />
-                <Typography>Placeholder</Typography>
-            </Stack>
+            <img
+                src={'/assets/vectors/logo-800x800.svg'}
+                alt='chat'
+                style={{
+                    width: '50px',
+                    height: '50px',
+                    borderRadius: '50%',
+                    marginRight: '1rem',
+                }}
+            />
             {currentUser.isSignedIn ? (
                 <>
                     <CustomSwitcherGroup exclusive theme={changingTheme}>
@@ -338,7 +335,7 @@ function MainAppbar({
                             alt={currentUser.name.charAt(0).toUpperCase()}
                             src={currentUser.photoURL}
                             sx={{
-                                bgcolor: 'primary.main',
+                                bgcolor: 'primary.light',
                                 color: 'primary.contrastText',
                                 height: 50,
                                 width: 50,
@@ -423,7 +420,6 @@ function MainAppbar({
                                 minWidth: 600,
                                 maxHeight: '700px',
                                 backgroundColor: 'primary.main',
-                                boxShadow: 24,
                                 borderRadius: '10px',
                                 py: 2,
                                 px: 4,
@@ -443,10 +439,7 @@ function MainAppbar({
                             >
                                 <Typography
                                     variant='h5'
-                                    sx={{
-                                        color: 'white',
-                                        fontWeight: 'bold',
-                                    }}
+                                    sx={{ fontWeight: 'bold' }}
                                 >
                                     Profile
                                 </Typography>
@@ -480,7 +473,7 @@ function MainAppbar({
                                             .toUpperCase()}
                                         src={avatarURL}
                                         sx={{
-                                            bgcolor: 'primary.main',
+                                            bgcolor: 'primary.light',
                                             color: 'primary.contrastText',
                                             height: 150,
                                             width: 150,
@@ -502,8 +495,8 @@ function MainAppbar({
 
                                         <Button
                                             sx={{ mr: 1 }}
-                                            color='info'
-                                            variant='filled'
+                                            color='secondary'
+                                            variant='contained'
                                             size='small'
                                         >
                                             <label
@@ -515,7 +508,7 @@ function MainAppbar({
                                         </Button>
                                         <Button
                                             color='error'
-                                            variant='outlined'
+                                            variant='contained'
                                             size='small'
                                             onClick={removePhotoURL}
                                         >
@@ -539,10 +532,7 @@ function MainAppbar({
                                     />
                                     <Typography
                                         variant='subtitle1'
-                                        sx={{
-                                            mt: 2,
-                                            color: 'white',
-                                        }}
+                                        sx={{ mt: 2 }}
                                     >
                                         Username - {currentUser.username}
                                     </Typography>
@@ -558,59 +548,49 @@ function MainAppbar({
                             >
                                 <TextField
                                     sx={{
-                                        width: '390px',
+                                        width: '500px',
                                         mb: 4,
                                         mr: 1.5,
                                         color: 'white',
                                     }}
                                     value={twitterProfile}
                                     onChange={handleInputChange}
-                                    InputLabelProps={{
-                                        sx: {
-                                            color: 'white',
-                                        },
-                                    }}
                                     InputProps={{
                                         startAdornment: (
                                             <InputAdornment position='start'>
                                                 <TwitterIcon
                                                     sx={{
-                                                        color: 'white',
+                                                        color: 'secondary.dark',
                                                         fontSize: '2rem',
                                                     }}
                                                 />
                                             </InputAdornment>
                                         ),
                                     }}
-                                    color='success'
+                                    color='secondary'
                                     variant='outlined'
                                     name='twitter'
                                     label='Twitter Profile Link'
                                 />
                                 <TextField
-                                    color='success'
+                                    color='secondary'
                                     name='instagram'
                                     value={instagramProfile}
                                     label='Instagram Profile Link'
                                     sx={{
-                                        width: '390px',
+                                        width: '500px',
                                         color: 'white',
                                         mb: 0.5,
                                         mr: 1.5,
                                     }}
                                     onChange={handleInputChange}
-                                    InputLabelProps={{
-                                        sx: {
-                                            color: 'white',
-                                        },
-                                    }}
                                     variant='outlined'
                                     InputProps={{
                                         startAdornment: (
                                             <InputAdornment position='start'>
                                                 <InstagramIcon
                                                     sx={{
-                                                        color: 'white',
+                                                        color: 'secondary.dark',
                                                         fontSize: '2rem',
                                                     }}
                                                 />

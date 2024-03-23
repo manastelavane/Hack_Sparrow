@@ -1,15 +1,17 @@
 import { useState } from 'react';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import Modal from '@mui/material/Modal';
-import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
-import SendIcon from '@mui/icons-material/Send';
-import Tooltip from '@mui/material/Tooltip';
-import ImageIcon from '@mui/icons-material/Image';
-import CancelIcon from '@mui/icons-material/Cancel';
-
-// import { light, richBlack, deepDark, dark } from '../utils/colors';
+import {
+    Box,
+    Divider,
+    Modal,
+    TextField,
+    IconButton,
+    Tooltip,
+} from '@mui/material';
+import {
+    Send as SendIcon,
+    Image as ImageIcon,
+    Cancel as CancelIcon,
+} from '@mui/icons-material';
 
 const MessageInput = ({
     handleSendMessage,
@@ -93,8 +95,7 @@ const MessageInput = ({
                         maxWidth: '80%',
                         height: 'auto',
                         maxHeight: '460px',
-                        backgroundColor:
-                            mode === 'dark' ? '#101010' : '#f0f0f0',
+                        backgroundColor: 'primary.dark',
                         boxShadow: 24,
                         borderRadius: '10px',
                         p: 2,
@@ -110,6 +111,7 @@ const MessageInput = ({
                             position: 'absolute',
                             top: 10,
                             right: 10,
+                            color: 'secondary.contrastText',
                         }}
                         cursor='pointer'
                         onClick={handleCloseImgModal}
@@ -144,7 +146,7 @@ const MessageInput = ({
                 sx={{
                     display: 'flex',
                     alignItems: 'center',
-                    // backgroundColor: mode === 'light' ? light : richBlack,
+                    backgroundColor: 'background.paper',
                     p: 1,
                 }}
             >
@@ -160,18 +162,9 @@ const MessageInput = ({
                             borderRadius: '20px',
                             fontFamily: 'Helvetica',
                             '&.Mui-focused fieldset': {
-                                // borderColor: dark,
+                                borderColor: 'secondary.main',
                             },
                         },
-                        '& .css-1uyx2m5-MuiFormLabel-root-MuiInputLabel-root.Mui-focused':
-                            {
-                                // color: dark,
-                            },
-
-                        '& .css-zi2b99-MuiFormLabel-root-MuiInputLabel-root.Mui-focused':
-                            {
-                                // color: dark,
-                            },
                     }}
                     color='success'
                     size='small'
@@ -196,7 +189,7 @@ const MessageInput = ({
                                 sx={{
                                     fontSize: '33px',
                                     cursor: 'pointer',
-                                    // color: deepDark,
+                                    color: 'secondary.dark',
                                 }}
                             />
                         </Tooltip>
@@ -207,7 +200,7 @@ const MessageInput = ({
                         <SendIcon
                             sx={{
                                 fontSize: '33px',
-                                // color: deepDark,
+                                color: 'secondary.dark',
                             }}
                         />
                     </Tooltip>

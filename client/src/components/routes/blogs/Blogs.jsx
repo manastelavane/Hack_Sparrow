@@ -85,8 +85,6 @@ function Blogs() {
                 maxHeight: 'calc(100vh - 75px)',
                 backgroundColor: 'background.paper',
                 padding: '5rem',
-                display: 'flex',
-                flexDirection: 'column',
                 pt: 0,
             }}
         >
@@ -125,7 +123,7 @@ function Blogs() {
                     alignItems: 'center',
                 }}
             >
-                You can share your experience or read others &apos; experiences
+                You can share your experience or read others&apos; experiences
                 here.
             </Typography>
 

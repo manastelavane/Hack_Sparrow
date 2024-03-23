@@ -236,7 +236,7 @@ const ChatInterface = ({ mode, otherUser, socketRef, connectSettings }) => {
             <AppBar
                 sx={{
                     width: '100%',
-                    // backgroundColor: mode === 'light' ? medium : bluegrey,
+                    backgroundColor: 'primary.light',
                     height: 61,
                     display: 'flex',
                     alignItems: 'center',
@@ -296,7 +296,7 @@ const ChatInterface = ({ mode, otherUser, socketRef, connectSettings }) => {
                         sx={{
                             height: 40,
                             width: 40,
-                            // color: deepDark,
+                            color: 'primary.dark',
                         }}
                     />
                 </IconButton>
@@ -310,10 +310,7 @@ const ChatInterface = ({ mode, otherUser, socketRef, connectSettings }) => {
                     overflowX: 'hidden',
                     display: 'flex',
                     flexDirection: 'column',
-                    backgroundImage:
-                        mode === 'dark'
-                            ? `url('/assets/vectors/chat-background-dark.svg')`
-                            : `url('/assets/vectors/chat-background.svg')`,
+                    backgroundImage: `url(/assets/vectors/chat-background.svg)`,
                     backgroundSize: '115px',
                 }}
             >
@@ -324,20 +321,14 @@ const ChatInterface = ({ mode, otherUser, socketRef, connectSettings }) => {
                         sx={{
                             alignSelf: 'center',
                             mb: '10px',
-                            // backgroundColor: mode === 'light' ? medium : light,
-                            // color: bluegrey,
                             font: 'Poppins, sans-serif',
-                            ':hover': {
-                                // backgroundColor: medium,
-                                color: 'black',
-                            },
                             borderRadius: '20px',
                             width: '195px',
                             height: '30px',
                         }}
                         variant='contained'
                         disableElevation
-                        color='success'
+                        color='secondary'
                     >
                         Load More Chats
                     </Button>

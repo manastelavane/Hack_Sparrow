@@ -1,23 +1,27 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
 import axios from 'axios';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import Fab from '@mui/material/Fab';
-import Modal from '@mui/material/Modal';
-import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
-import Tooltip from '@mui/material/Tooltip';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import RecordVoiceOverIcon from '@mui/icons-material/RecordVoiceOver';
-import Typography from '@mui/material/Typography';
-import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
-import CancelIcon from '@mui/icons-material/Cancel';
+import {
+    Box,
+    Card,
+    CardMedia,
+    CardContent,
+    Fab,
+    Modal,
+    Tooltip,
+    TextField,
+    Button,
+    Typography,
+} from '@mui/material';
+import {
+    Add as AddIcon,
+    Delete as DeleteIcon,
+    RecordVoiceOver as RecordVoiceOverIcon,
+    PhoneInTalk as PhoneInTalkIcon,
+    Cancel as CancelIcon,
+} from '@mui/icons-material';
 import { useHMSActions } from '@100mslive/hms-video-react';
 
 import {
@@ -27,8 +31,9 @@ import {
 } from '../../../actions/actions';
 
 const Groups = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     const hmsActions = useHMSActions();
     const currentUser = useSelector((state) => state.auth);
 
@@ -290,13 +295,10 @@ const Groups = () => {
                 variant='h2'
                 component='h3'
                 sx={{
-                    // color:
-                    //     mode === 'light'
-                    //         ? deepDark.concat('aa')
-                    //         : light.concat('aa'),
+                    color: 'secondary.dark',
                     margin: '2rem',
                     fontFamily: 'Work Sans',
-                    // fontWeight: 'medium',
+                    fontWeight: 'medium',
                     fontSize: '1.5rem',
                     textAlign: 'center',
                     display: 'flex',

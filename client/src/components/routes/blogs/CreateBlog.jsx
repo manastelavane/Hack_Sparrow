@@ -124,7 +124,7 @@ function CreateBlog() {
                 mt: '75px',
                 height: 'calc(100vh - 75px)',
                 maxHeight: 'calc(100vh - 75px)',
-                backgroundColor: 'background.default',
+                backgroundColor: 'background.paper',
                 padding: '5rem',
                 pt: 0,
             }}
@@ -133,7 +133,7 @@ function CreateBlog() {
                 sx={{
                     p: 2,
                     mt: 2,
-                    backgroundColor: 'success.light',
+                    backgroundColor: 'secondary.light',
                     boxShadow: '0 0 10px 0 rgba(0, 0, 0, 0.3)',
                     border: 'none',
                     borderRadius: '15px',
@@ -147,7 +147,7 @@ function CreateBlog() {
                         alignItems: 'center',
                         my: 2,
                         mb: 4,
-                        color: 'primary.contrastText',
+                        color: 'secondary.contrastText',
                         padding: '0',
                         fontWeight: '600',
                         fontSize: '2.5rem',
@@ -165,7 +165,7 @@ function CreateBlog() {
                         id='outlined-required'
                         label='Title'
                         value={title}
-                        color='success'
+                        color='primary'
                         onChange={(e) => setTitle(e.target.value)}
                         sx={{
                             backgroundColor: 'whitesmoke',
@@ -186,7 +186,7 @@ function CreateBlog() {
                         id='outlined-required'
                         label='Summary (max 55 characters)'
                         value={summary}
-                        color='success'
+                        color='primary'
                         onChange={(e) => setSummary(e.target.value)}
                         sx={{
                             backgroundColor: 'whitesmoke',
@@ -214,7 +214,6 @@ function CreateBlog() {
                             style={{
                                 fontSize: '1.1rem',
                                 fontWeight: '500',
-                                color: 'black',
                             }}
                         >
                             Choose cover image -{' '}
@@ -265,19 +264,11 @@ function CreateBlog() {
                     </Box>
 
                     <Button
-                        color='success'
-                        sx={{
-                            mt: 3,
-                            backgroundColor: 'success.dark',
-                            color: 'white',
-                            font: '500 0.9rem Poppins, sans-serif',
-                            ':hover': {
-                                backgroundColor: 'success.main',
-                            },
-                        }}
+                        color='primary'
                         variant='contained'
                         type='submit'
                         disabled={buttonStatus}
+                        sx={{ borderRadius: '10px' }}
                     >
                         Create Post
                     </Button>

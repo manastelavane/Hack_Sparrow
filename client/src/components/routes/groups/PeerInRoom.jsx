@@ -19,14 +19,7 @@ import {
     selectLocalPeer,
 } from '@100mslive/hms-video-react';
 
-// import { light, bluegrey, deepDark } from '../utils/colors';
-
-// interface PeerInRoomProps {
-//     peer: HMSPeer;
-//     mode: string;
-// }
-
-const PeerInRoom = ({ peer, mode }) => {
+const PeerInRoom = ({ peer }) => {
     const hmsActions = useHMSActions();
     const audioEnabled = useHMSStore(selectIsPeerAudioEnabled(peer.id));
     const localPeer = useHMSStore(selectLocalPeer);
@@ -61,7 +54,7 @@ const PeerInRoom = ({ peer, mode }) => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                // backgroundColor: mode === 'light' ? light : bluegrey,
+                backgroundColor: 'secondary.main',
                 padding: '0.9rem',
                 px: '3.5rem',
                 py: '3rem',

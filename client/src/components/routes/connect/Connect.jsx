@@ -158,11 +158,12 @@ const Connect = ({ mode }) => {
                     <Tabs
                         sx={{
                             alignItems: 'center',
-                            // boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.5)',
-                            backgroundColor: 'darkgreen',
+                            backgroundColor: 'primary.light',
                             '& .MuiTabs-indicator': {
-                                backgroundColor: 'success.light',
+                                backgroundColor: 'secondary.main',
                             },
+                            borderBottom: '1px solid',
+                            borderColor: 'primary.light',
                         }}
                         value={value}
                         onChange={handleChange}
@@ -172,14 +173,8 @@ const Connect = ({ mode }) => {
                         <Tab
                             sx={{
                                 fontSize: '1.1rem',
-                                borderRight:
-                                    mode === 'light'
-                                        ? '1px solid rgba(255, 255, 255, 0.52)'
-                                        : '1px solid rgba(255, 255, 255, 0.22)',
-                                borderBottom:
-                                    mode === 'light'
-                                        ? '1px solid rgba(255, 255, 255, 0.52)'
-                                        : '1px solid rgba(255, 255, 255, 0.22)',
+                                borderRight: '3px solid',
+                                borderColor: 'primary.dark',
                             }}
                             icon={
                                 <ChatIcon
@@ -190,11 +185,10 @@ const Connect = ({ mode }) => {
                         <Tab
                             sx={{
                                 fontSize: '1.1rem',
-                                borderBottom:
-                                    mode === 'light'
-                                        ? '1px solid rgba(255, 255, 255, 0.52)'
-                                        : '1px solid rgba(255, 255, 255, 0.22)',
+                                borderRight: '3px solid',
+                                borderColor: 'primary.dark',
                             }}
+                            s
                             icon={
                                 <PersonSearchIcon
                                     sx={{ fontSize: '34px', color: 'white' }}
@@ -204,18 +198,7 @@ const Connect = ({ mode }) => {
                         <Tab
                             sx={{
                                 fontSize: '1.1rem',
-                                borderLeft:
-                                    mode === 'light'
-                                        ? '1px solid rgba(255, 255, 255, 0.52)'
-                                        : '1px solid rgba(255, 255, 255, 0.22)',
-                                borderBottom:
-                                    mode === 'light'
-                                        ? '1px solid rgba(255, 255, 255, 0.52)'
-                                        : '1px solid rgba(255, 255, 255, 0.22)',
-                                borderRight:
-                                    mode === 'light'
-                                        ? '1px solid rgba(255, 255, 255, 0.52)'
-                                        : '1px solid rgba(255, 255, 255, 0.22)',
+                                borderRight: '1px solid red',
                             }}
                             icon={
                                 <SettingsIcon
@@ -230,11 +213,8 @@ const Connect = ({ mode }) => {
                         width: '100%',
                         height: 'calc(100vh - 136px)',
                         overflowY: 'auto',
-                        borderRight:
-                            mode === 'light'
-                                ? '1px solid rgba(0, 0, 0, 0.12)'
-                                : '1px solid rgba(255, 255, 255, 0.12)',
-                        // backgroundColor: mode === 'light' ? light : richBlack,
+                        backgroundColor: 'background.paper',
+                        borderRight: '1px solid red',
                     }}
                 >
                     {value === 0 && (
@@ -278,11 +258,7 @@ const Connect = ({ mode }) => {
                     }}
                 >
                     <img
-                        src={
-                            mode === 'dark'
-                                ? '/assets/vectors/welcome-screen-dark.svg'
-                                : '/assets/vectors/welcome-screen.svg'
-                        }
+                        src='/assets/vectors/welcome-screen.svg'
                         alt='chat'
                         style={{ width: '400px', height: '400px' }}
                     />
@@ -290,11 +266,11 @@ const Connect = ({ mode }) => {
                         sx={{
                             fontWeight: '700',
                             fontSize: '2rem',
-                            // color: mode === 'light' ? deepDark : medium,
+                            color: 'secondary.light',
                             textAlign: 'center',
                         }}
                     >
-                        Here you can chat with your friends
+                        Chat with amazing people!
                     </Typography>
                 </Box>
             ) : (
