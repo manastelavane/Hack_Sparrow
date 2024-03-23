@@ -6,10 +6,10 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 // Redux
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 // React Router
-import { useNavigate, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 // HMS
 import { HMSRoomProvider } from '@100mslive/hms-video-react';
@@ -18,32 +18,32 @@ import { HMSRoomProvider } from '@100mslive/hms-video-react';
 import LandingPage from './components/routes/LandingPage';
 import MainAppbar from './components/navbar/MainAppbar';
 import ProtectedRoute from './components/helpers/ProtectedRoute';
+import Loading from './components/helpers/Loading';
+import Notify from './components/helpers/Notify';
 
 // Routes
 import Groups from './components/routes/groups/Groups';
+import Blogs from './components/routes/blogs/Blogs';
+
+// Themes
+import themes from './utils/themes';
 
 function App() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
     const [supportsPWA, setSupportsPWA] = useState(false);
     const [promptInstall, setPromptInstall] = useState(null);
 
-    const isSignedIn = true;
+    const isSignedIn = useSelector((state) => state.auth.isSignedIn);
 
-    const changingTheme = createTheme({
-        palette: {
-            mode: 'light',
-        },
+    const localTheme = window.localStorage.getItem('healthAppTheme');
 
-        typography: {
-            fontFamily: ['Poppins', 'Work Sans', 'sans-serif'].join(','),
-        },
-    });
+    const [mode, setMode] = useState(localTheme ? localTheme : 'light');
 
-    const themeChange = (mode) => {
+    const changingTheme = createTheme(themes[mode]);
+
+    const themeChange = (event) => {
+        setMode(event.target.value);
         // Change in local storage
-        localStorage.setItem('healthAppTheme', mode);
+        window.localStorage.setItem('healthAppTheme', event.target.value);
     };
 
     useEffect(() => {
@@ -54,14 +54,18 @@ function App() {
         };
 
         window.addEventListener('beforeinstallprompt', handler);
+        localStorage.setItem('healthAppTheme', 'light');
     }, []);
 
     return (
         <ThemeProvider theme={changingTheme}>
             <CssBaseline />
+            <Loading />
+            <Notify />
             {isSignedIn && (
                 <MainAppbar
                     {...{
+                        mode,
                         themeChange,
                         supportsPWA,
                         promptInstall,
@@ -76,6 +80,16 @@ function App() {
                         <ProtectedRoute>
                             <HMSRoomProvider>
                                 <Groups />
+                            </HMSRoomProvider>
+                        </ProtectedRoute>
+                    }
+                />
+                <Route
+                    path='/blogs'
+                    element={
+                        <ProtectedRoute>
+                            <HMSRoomProvider>
+                                <Blogs />
                             </HMSRoomProvider>
                         </ProtectedRoute>
                     }

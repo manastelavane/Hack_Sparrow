@@ -73,13 +73,11 @@ MainAppbar.propTypes = {
     themeChange: PropTypes.func,
 };
 
-function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
+function MainAppbar({ mode, themeChange, supportsPWA, promptInstall }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const currentUser = useSelector((state) => state.auth);
-
-    const mode = window.localStorage.getItem('healthAppTheme') || 'light';
 
     const [anchorEl, setAnchorEl] = useState(null);
     const [selected, setSelected] = useState(
@@ -638,12 +636,13 @@ function MainAppbar({ themeChange, supportsPWA, promptInstall }) {
                     labelId='demo-simple-select-autowidth-label'
                     id='demo-simple-select-autowidth'
                     value={mode}
-                    label='Age'
                     onChange={themeChange}
+                    sx={{ color: 'secondary.contrastText' }}
                 >
-                    <MenuItem value={'light'}>Light</MenuItem>
-                    <MenuItem value={'dark'}>Dark</MenuItem>
-                    <MenuItem value={'accesible'}>Accesible</MenuItem>
+                    <MenuItem value='light'>Light</MenuItem>
+                    <MenuItem value='dark'>Dark</MenuItem>
+                    <MenuItem value='highContrast'>High Contrast</MenuItem>
+                    <MenuItem value='colorBlind'>Color Blind</MenuItem>
                 </Select>
             </FormControl>
         </Box>
