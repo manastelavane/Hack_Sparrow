@@ -62,7 +62,7 @@ const PeerInRoom = ({ peer, report, setReport, localCustomerUserId }) => {
 
         const data = {
             reportedByUser: localCustomerUserId,
-            reportedTo: localPeer.customerUserId,
+            reportedTo: temp[index].uid,
         };
         try {
             await axios({

@@ -24,7 +24,7 @@ import PeerInRoom from './PeerInRoom';
 const VoiceRoom = ({ mode }) => {
     const peers = useHMSStore(selectPeers);
     const [report, setReport] = useState([]);
-    console.log(report);
+    // console.log(report);
     const isConnected = useHMSStore(selectIsConnectedToRoom);
     const navigate = useNavigate();
     const hmsActions = useHMSActions();
@@ -32,7 +32,7 @@ const VoiceRoom = ({ mode }) => {
     const [deafen, setDeafen] = useState(false);
     const isLocalAudioEnabled = useHMSStore(selectIsLocalAudioEnabled);
     const localPeer = useHMSStore(selectLocalPeer);
-    console.log(localPeer);
+    // console.log(localPeer);
 
     useEffect(() => {
         //add {id:peer.id,report:0} to report array if id is not present. It should not add myslef to reprt array
