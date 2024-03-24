@@ -158,3 +158,34 @@ exports.updateTestScore = async (req, res) => {
         console.log(error);
     }
 };
+
+exports.reportUser = async (req, res) => {
+    try {
+        const { reportedByUser, reportedTo } = req.body;
+        // console.log(reportedByUser, reportedTo);
+        const user = await UserModel.findOne({ uid: reportedTo });
+        if (!user) {
+            res.status(404).json({
+                success: false,
+                message: 'User not found',
+            });
+        }
+        const updatedUser = await UserModel.findOneAndUpdate(
+            { uid: reportedTo },
+            { $push: { reportedBy: reportedByUser } },
+            { new: true }
+        );
+        res.status(200).json({
+            success: true,
+            result: { ...updatedUser._doc },
+            message: 'User reported',
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Something went wrong',
+            error: error.message,
+        });
+        console.log(error);
+    }
+};

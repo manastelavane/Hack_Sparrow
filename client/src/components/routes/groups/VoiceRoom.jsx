@@ -16,18 +16,40 @@ import {
     selectIsConnectedToRoom,
     selectIsLocalAudioEnabled,
     selectPeers,
+    selectLocalPeer,
 } from '@100mslive/hms-video-react';
 
 import PeerInRoom from './PeerInRoom';
 
 const VoiceRoom = ({ mode }) => {
     const peers = useHMSStore(selectPeers);
+    const [report, setReport] = useState([]);
+    console.log(report);
     const isConnected = useHMSStore(selectIsConnectedToRoom);
     const navigate = useNavigate();
     const hmsActions = useHMSActions();
 
     const [deafen, setDeafen] = useState(false);
     const isLocalAudioEnabled = useHMSStore(selectIsLocalAudioEnabled);
+    const localPeer = useHMSStore(selectLocalPeer);
+    console.log(localPeer);
+
+    useEffect(() => {
+        //add {id:peer.id,report:0} to report array if id is not present. It should not add myslef to reprt array
+        if (peers) {
+            const temp = peers.filter(
+                (peer) =>
+                    peer.id !== localPeer.id &&
+                    !report.find((r) => r.id === peer.id)
+            );
+            const tempReport = temp.map((peer) => ({
+                id: peer.id,
+                report: 0,
+                uid: peer.customerUserId,
+            }));
+            setReport([...report, ...tempReport]);
+        }
+    }, [peers]);
 
     const setPeersVolume = (volume) => {
         for (const peer of peers) {
@@ -80,7 +102,14 @@ const VoiceRoom = ({ mode }) => {
             >
                 {peers &&
                     peers.map((peer) => (
-                        <PeerInRoom key={peer.id} peer={peer} mode={mode} />
+                        <PeerInRoom
+                            key={peer.id}
+                            peer={peer}
+                            mode={mode}
+                            report={report}
+                            setReport={setReport}
+                            localCustomerUserId={localPeer.customerUserId}
+                        />
                     ))}
             </Paper>
             <Paper

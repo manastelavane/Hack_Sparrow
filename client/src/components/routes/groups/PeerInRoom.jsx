@@ -12,14 +12,20 @@ import AddModeratorIcon from '@mui/icons-material/AddModerator';
 import RemoveModeratorIcon from '@mui/icons-material/RemoveModerator';
 import ListItemText from '@mui/material/ListItemText';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
+import ReportIcon from '@mui/icons-material/Report';
 import {
     useHMSActions,
     useHMSStore,
     selectIsPeerAudioEnabled,
     selectLocalPeer,
 } from '@100mslive/hms-video-react';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { notifyAction } from '../../../actions/actions';
 
-const PeerInRoom = ({ peer }) => {
+const PeerInRoom = ({ peer, report, setReport, localCustomerUserId }) => {
+    const dispatch = useDispatch();
     const hmsActions = useHMSActions();
     const audioEnabled = useHMSStore(selectIsPeerAudioEnabled(peer.id));
     const localPeer = useHMSStore(selectLocalPeer);
@@ -46,6 +52,44 @@ const PeerInRoom = ({ peer }) => {
         setAnchorEl(null);
     };
 
+    const onReport = async () => {
+        const index = report.findIndex((r) => r.id === peer.id);
+        const temp = [...report];
+        if (temp[index].report === 1) return;
+        temp[index].report = 1;
+        const auth = window.localStorage.getItem('healthApp');
+        const { dnd } = JSON.parse(auth);
+
+        const data = {
+            reportedByUser: localCustomerUserId,
+            reportedTo: localPeer.customerUserId,
+        };
+        try {
+            await axios({
+                method: 'PATCH',
+                url: `${import.meta.env.VITE_SERVER_URL}/api/user/report`,
+                headers: {
+                    'Content-Type': 'application/json',
+                    authorization: `Bearer ${dnd}`,
+                },
+                data,
+            });
+            setReport(temp);
+            dispatch(
+                notifyAction(true, 'success', 'Reported User Successfully')
+            );
+        } catch (error) {
+            console.log(error);
+            dispatch(
+                notifyAction(
+                    true,
+                    'error',
+                    error.response.data.message ||
+                        'It seems something is wrong, please log out and log in again. later :('
+                )
+            );
+        }
+    };
     return (
         <Box
             key={peer.id}
@@ -65,6 +109,24 @@ const PeerInRoom = ({ peer }) => {
         >
             {isModerator ? (
                 <>
+                    <IconButton
+                        sx={{
+                            position: 'absolute',
+                            top: '6px',
+                            right: '44px',
+                        }}
+                        onClick={onReport}
+                    >
+                        {
+                            //check if user is already reported, else if myself then show nothing
+                            report.find((r) => r.id === peer.id)?.report ===
+                            0 ? (
+                                <ReportGmailerrorredIcon />
+                            ) : localPeer.id === peer.id ? null : (
+                                <ReportIcon />
+                            )
+                        }
+                    </IconButton>
                     <IconButton
                         sx={{
                             position: 'absolute',
@@ -151,13 +213,33 @@ const PeerInRoom = ({ peer }) => {
                 </>
             ) : (
                 !audioEnabled && (
-                    <MicOffIcon
-                        sx={{
-                            position: 'absolute',
-                            top: '10px',
-                            right: '8px',
-                        }}
-                    />
+                    <>
+                        <IconButton
+                            sx={{
+                                position: 'absolute',
+                                top: '2px',
+                                right: '44px',
+                            }}
+                            onClick={onReport}
+                        >
+                            {
+                                //check if user is already reported, else if myself then show nothing
+                                report.find((r) => r.id === peer.id)?.report ===
+                                0 ? (
+                                    <ReportGmailerrorredIcon />
+                                ) : localPeer.id === peer.id ? null : (
+                                    <ReportIcon />
+                                )
+                            }
+                        </IconButton>
+                        <MicOffIcon
+                            sx={{
+                                position: 'absolute',
+                                top: '10px',
+                                right: '8px',
+                            }}
+                        />
+                    </>
                 )
             )}
             <Tooltip title={peer.name.split('@')[0]}>
