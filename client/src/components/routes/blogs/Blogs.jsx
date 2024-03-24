@@ -30,13 +30,16 @@ function Blogs() {
     const currentUser = useSelector((state) => state.auth);
 
     const handleChange = (event) => {
+        if (event.target.value !== filter) {
+            setBlogs(null);
+            setPageNum(0);
+        }
         setFilter(event.target.value);
     };
 
     useEffect(() => {
         const getBlogs = async () => {
             try {
-                setBlogs(null);
                 setLoading(true);
                 const blogsFromServer = await axios.get(
                     `${
