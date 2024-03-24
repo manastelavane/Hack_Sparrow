@@ -99,7 +99,7 @@ const ProfileInfo = ({ otherUser, setProfileInfoOpen }) => {
                         <Stack direction='row' alignItems='center' spacing={1}>
                             <Typography variant='subtitle1'>Bio -</Typography>
                             <Chip
-                                label={otherUser?.bio}
+                                label={otherUser?.bio ? otherUser?.bio : 'None'}
                                 color='success'
                                 size='medium'
                             />
@@ -109,7 +109,11 @@ const ProfileInfo = ({ otherUser, setProfileInfoOpen }) => {
                                 Username -
                             </Typography>
                             <Chip
-                                label={otherUser?.username}
+                                label={
+                                    otherUser?.username
+                                        ? otherUser?.username
+                                        : 'Hidden'
+                                }
                                 color='success'
                                 size='medium'
                             />
