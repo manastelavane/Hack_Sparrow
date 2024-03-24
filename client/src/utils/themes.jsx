@@ -39,28 +39,21 @@ const themes = {
         palette: {
             mode: 'dark',
             primary: {
-                main: '#000000', // Black
-                contrastText: '#ffffff', // White
+                main: '#2c5d37', // Black
             },
             secondary: {
-                main: '#ffffff', // White
-                contrastText: '#000000', // Black
+                main: '#e3c515', // Yellow
             },
             background: {
-                paper: '#000000', // Black
+                default: '#ffffff', // White
+                paper: '#4b2d9f', // Black
             },
             // other high contrast settings
             error: {
-                main: '#ff0000', // Red
-            },
-            warning: {
-                main: '#ffff00', // Yellow
+                main: '#ee51b1', // Red
             },
             info: {
-                main: '#0000ff', // Blue
-            },
-            success: {
-                main: '#008000', // Green
+                main: '#a59cd3', // Blue
             },
         },
         typography: {
