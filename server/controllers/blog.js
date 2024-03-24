@@ -15,7 +15,7 @@ exports.createBlog = async (req, res) => {
         const completeText = title + ' ' + summary + ' ' + content;
         // console.log(completeText);
         const sentimentResponse = await axios.post(
-            'http://127.0.0.1:5000/analyze-sentiment',
+            'https://0ccc-2401-4900-1988-428e-d4c3-839e-8981-3f7a.ngrok-free.app/analyze-sentiment',
             {
                 blog: String(completeText), // You may want to analyze the 'content' of the blog
             }
@@ -155,7 +155,7 @@ exports.editBlogById = async (req, res) => {
         // Send the updated blog content to the sentiment analysis server
         const completeText = title + ' ' + summary + ' ' + content;
         const sentimentResponse = await axios.post(
-            'http://127.0.0.1:5000/analyze-sentiment',
+            'https://0ccc-2401-4900-1988-428e-d4c3-839e-8981-3f7a.ngrok-free.app/analyze-sentiment',
             {
                 blog: String(completeText),
             }

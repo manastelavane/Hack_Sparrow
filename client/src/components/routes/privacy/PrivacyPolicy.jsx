@@ -270,19 +270,11 @@ export default function PrivacyPolicy() {
                         periodically.{' '}
                     </p>
                 </Policy>
-
-                <Divider
-                    sx={{
-                        my: '1rem',
-                        backgroundColor: 'primary.main',
-                    }}
-                />
             </Box>
             <Box
                 sx={{
                     display: 'flex',
                     justifyContent: 'center',
-                    display: 'flex',
                     flexDirection: 'column',
                     padding: '2rem 1.5rem',
                     my: '2rem',
@@ -302,26 +294,17 @@ export default function PrivacyPolicy() {
                         display: 'flex',
                         justifyContent: 'center',
                         alignItems: 'center',
+                        flexDirection: 'column',
                     }}
                 >
-                    <p>
-                        By using [Your App Name], you agree to the terms
-                        outlined in this Privacy Policy. If you have any
-                        questions or concerns about our privacy practices,
-                        please contact us at [contact email or link].
-                    </p>
-
-                    <p>
-                        <Typography
-                            variant='overline'
-                            display='block'
-                            gutterBottom
-                        >
-                            Last updated: [Date] [Your App Name] Team
-                        </Typography>
-                    </p>
-
+                    By using CalmNest, you agree to the terms outlined in this
+                    Privacy Policy. <br></br>If you have any questions or
+                    concerns about our privacy practices, please contact us at
+                    itsvishal2417@gmail.com.
                     <br></br>
+                </Typography>
+                <Typography variant='caption'>
+                    Last updated: 24 Mar 2024, CalmNest Team
                 </Typography>
 
                 {/* Checkbox for accepting privacy */}
@@ -340,7 +323,7 @@ export default function PrivacyPolicy() {
                         onChange={handleCheckboxChange}
                     />
                     <label htmlFor='privacy'>
-                        I have read and accept the Privacy Policy
+                        I have read and I accept the Privacy Policy.
                     </label>
 
                     <Button
