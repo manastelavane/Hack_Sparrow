@@ -98,7 +98,7 @@ function LandingPage() {
                                 fontSize: '3rem',
                             }}
                         >
-                            PlaceHolderApp
+                            Calm Nest
                         </h1>
                         <Typography
                             sx={{
@@ -113,11 +113,11 @@ function LandingPage() {
                                 border: '1px solid rgba(255, 255, 255, 0.8)',
                             }}
                         >
-                            PlaceHolderApp is a web app which focuses on
-                            creating a safe and supportive environment. Whether
-                            you&apos;re looking for a community to connect with
-                            or professional guidance, PlaceHolderApp is here to
-                            help. Remember, <br />
+                            Calm Nest is a web app which focuses on creating a
+                            safe and supportive environment. Whether you&apos;re
+                            looking for a community to connect with or
+                            professional guidance, CalmNest is here to help.
+                            Remember, <br />
                             It&apos;s OK Not To Be OK.
                         </Typography>
                         <Box sx={{ mt: 3 }}>
