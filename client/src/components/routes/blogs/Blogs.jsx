@@ -218,7 +218,7 @@ function Blogs() {
                             <Card
                                 key={blog._id}
                                 sx={{
-                                    backgroundColor: 'success.light',
+                                    backgroundColor: 'primary.main',
                                     color: 'white',
                                     borderRadius: '10px',
                                     border: 'none',
@@ -266,7 +266,7 @@ function Blogs() {
             </Box>
             {loading && (
                 <img
-                    style={{ alignSelf: 'center', width: '160px' }}
+                    style={{ alignSelf: 'center', width: '200px' }}
                     src='/assets/vectors/load-more.svg'
                     alt=''
                 />

@@ -395,13 +395,14 @@ function MainAppbar({
                             {/* Theme Swticher dropDown */}
                             <FormControl
                                 variant='outlined'
-                                sx={{ minWidth: 80 }}
+                                sx={{ minWidth: 80, height: 50 }}
                             >
                                 <Select
                                     labelId='demo-simple-select-autowidth-label'
                                     id='demo-simple-select-autowidth'
                                     value={mode}
                                     onChange={themeChange}
+                                    sx={{ height: 40, mt: 1 }}
                                 >
                                     <MenuItem value='light'>Light</MenuItem>
                                     <MenuItem value='dark'>Dark</MenuItem>

@@ -156,8 +156,7 @@ const MessageInput = ({
                         width: '100%',
                         border: 'none',
                         '& .MuiOutlinedInput-root': {
-                            backgroundColor:
-                                mode === 'dark' ? '#101010' : '#f0f0f0',
+                            backgroundColor: 'background.paper',
                             paddingRight: '6px',
                             borderRadius: '20px',
                             fontFamily: 'Helvetica',
@@ -166,7 +165,6 @@ const MessageInput = ({
                             },
                         },
                     }}
-                    color='success'
                     size='small'
                     multiline
                     maxRows={2}

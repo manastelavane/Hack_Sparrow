@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 // MUI imports
-import { Box, Button, Typography } from '@mui/material';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import { Box, Button, Divider, Typography } from '@mui/material';
 
 // React Router imports
 import { useNavigate } from 'react-router-dom';
@@ -15,10 +15,15 @@ import { useDispatch } from 'react-redux';
 
 // Actions
 import {
-    stopLoadingAction,
-    startLoadingAction,
     notifyAction,
+    startLoadingAction,
+    stopLoadingAction,
 } from '../../../actions/actions';
+
+// Components
+import Mainheading from './Mainheading';
+import Policy from './Policy';
+import SubHeading from './SubHeading';
 
 export default function PrivacyPolicy() {
     const dispatch = useDispatch();
@@ -95,6 +100,44 @@ export default function PrivacyPolicy() {
                 />
             </Typography>
 
+
+
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    flexDirection: 'column',
+                    padding: '2rem 1.5rem',
+                    my: '2rem',
+                    backgroundColor: 'primary.light',
+                    color: 'primary.dark',
+                    fontSize: '1.1rem',
+                    borderRadius: '15px',
+                    border: `1px solid ${'primary.main'}`,
+                }}
+            >
+                <Typography
+                    sx={{
+                        fontFamily: 'Work Sans',
+                        fontWeight: '600',
+                        fontSize: '1.5rem',
+                        textAlign: 'left',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <p>
+                    At Unspecified Health App, we are committed to protecting
+                    your privacy and ensuring the confidentiality of your
+                    personal information. This Privacy Policy outlines how we
+                    collect, use, and protect the information you provide to us
+                    when using our digital platform.
+                </p>
+                    <br></br>
+                </Typography>
+            </Box>
+
             <Box
                 sx={{
                     minWidth: 650,
@@ -104,37 +147,48 @@ export default function PrivacyPolicy() {
                     padding: '2rem',
                 }}
             >
-                <p>
-                    At Unspecified Health App, we are committed to protecting
-                    your privacy and ensuring the confidentiality of your
-                    personal information. This Privacy Policy outlines how we
-                    collect, use, and protect the information you provide to us
-                    when using our digital platform.
-                </p>
-                <Typography variant='h2' component='h3'>
-                    Information We Collect:
-                </Typography>
-                <Typography variant='h3' component='h4'>
-                    Personal Information:
-                </Typography>
+                <Mainheading>
+                 Information We Collect
+                </Mainheading>
+
+
+                <SubHeading>
+                Personal Information
+                </SubHeading>
+
+
+                <Policy>
                 <p>
                     When you register on our platform, we may collect certain
                     personal information such as your name, email address, and
                     other contact details. This information is used to create
                     and manage your account and provide personalized services.{' '}
                 </p>
-                <Typography variant='h3' component='h4'>
-                    Usage Data:
-                </Typography>
+                </Policy>
+
+                <SubHeading>
+                Usage Data
+                </SubHeading>
+
+                <Policy>
                 <p>
                     We may collect information about how you interact with our
-                    platform, including your browsing activity, the pages you
-                    visit, and the features you use. This data helps us improve
+                    platform, including which groups you join, which blogs you write, which people You
+                    have connected to and the results of your tests if you have taken any. This data helps us improve
                     our services and enhance your user experience.
                 </p>
-                <Typography variant='h2' component='h3'>
-                    Use of Information:
-                </Typography>
+                </Policy>
+
+                <Divider sx={{
+                    my: '1rem',
+                    backgroundColor: 'primary.main',
+                }}/>
+
+                <Mainheading>
+                Use of Information
+                </Mainheading>
+
+                <Policy>                
                 <p>
                     We use the information we collect to provide and improve our
                     services, personalize your experience, and communicate with
@@ -142,10 +196,20 @@ export default function PrivacyPolicy() {
                     information is kept confidential and is not shared with any
                     third parties without your consent, except as required by
                     law or to fulfill our legal obligations.
+                    The information about your test results (as given in Take a Test) is used to 
+                    recommend you blogs and groups that might be helpful for you.
                 </p>
-                <Typography variant='h2' component='h3'>
-                    Data Security:
-                </Typography>
+                </Policy>
+
+                <Divider sx={{
+                    my: '1rem',
+                    backgroundColor: 'primary.main',
+                }}/>
+                
+                <Mainheading>
+                Data Security
+                </Mainheading>
+                <Policy>
                 <p>
                     We implement industry-standard security measures to protect
                     your personal information from unauthorized access,
@@ -153,44 +217,109 @@ export default function PrivacyPolicy() {
                     stored securely, and access to this information is
                     restricted to authorized personnel only.
                 </p>
-                <Typography variant='h2' component='h3'>
-                    Anonymous Usage:
-                </Typography>
+                </Policy>
+
+                <Divider sx={{
+                    my: '1rem',
+                    backgroundColor: 'primary.main',
+                }}/>
+
+                <Mainheading>
+                Anonymous Usage
+                </Mainheading>
+
+                <Policy>
                 <p>
                     We respect your right to privacy and offer options for
                     anonymous usage of our platform. You may choose to use
                     certain features anonymously, without providing any personal
-                    information. Third-Party Services: Our platform may
-                    integrate with third-party services or tools to enhance
-                    functionality. These third-party services are governed by
-                    their own privacy policies, and we are not responsible for
-                    their practices.
+                    information.
                 </p>
-                <Typography variant='h2' component='h3'>
-                    Children&apos;s Privacy:
-                </Typography>
+                </Policy>
+
+                <Divider sx={{
+                    my: '1rem',
+                    backgroundColor: 'primary.main',
+                }}/>
+
+                <Mainheading>
+                Children&apos;s Privacy:
+                </Mainheading>
+
+                <Policy>
                 <p>
                     Our platform is not intended for use by children under the
                     age of 13. We do not knowingly collect personal information
                     from children, and if we become aware of such information,
                     we will take appropriate steps to delete it.{' '}
                 </p>
-                <Typography variant='h2' component='h3'>
-                    Changes to Privacy Policy:
-                </Typography>
+                </Policy>
+
+                <Divider sx={{
+                    my: '1rem',
+                    backgroundColor: 'primary.main',
+                }}/>
+
+                <Mainheading>
+
+                    Changes to Privacy Policy
+                </Mainheading>
+
+                <Policy>
                 <p>
                     We reserve the right to update or modify this Privacy Policy
                     at any time. Any changes will be reflected on this page, and
                     we encourage you to review this policy periodically.{' '}
                 </p>
-                By using [Your App Name], you agree to the terms outlined in
-                this Privacy Policy. If you have any questions or concerns about
-                our privacy practices, please contact us at [contact email or
-                link].
-                <Typography variant='overline' display='block' gutterBottom>
+                </Policy>
+
+                <Divider sx={{
+                    my: '1rem',
+                    backgroundColor: 'primary.main',
+                }}/>
+
+    </Box>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        padding: '2rem 1.5rem',
+                        my: '2rem',
+                        backgroundColor: 'primary.light',
+                        color: 'primary.dark',
+                        fontSize: '1.1rem',
+                        borderRadius: '15px',
+                        border: `1px solid ${'primary.main'}`,
+                    }}
+                >
+                    <Typography
+                        sx={{
+                            fontFamily: 'Work Sans',
+                            fontWeight: '600',
+                            fontSize: '1.5rem',
+                            textAlign: 'left',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                            <p>
+                            By using [Your App Name], you agree to the terms outlined in
+                        this Privacy Policy. If you have any questions or concerns about
+                        our privacy practices, please contact us at [contact email or
+                        link].
+                        </p>
+
+                <p><Typography variant='overline' display='block' gutterBottom>
                     Last updated: [Date] [Your App Name] Team
+                </Typography></p>
+
+
+                    <br></br>   
                 </Typography>
-            </Box>
+
 
             {/* Checkbox for accepting privacy */}
             <Box
@@ -221,5 +350,6 @@ export default function PrivacyPolicy() {
                 </Button>
             </Box>
         </Box>
+</Box>
     );
 }
