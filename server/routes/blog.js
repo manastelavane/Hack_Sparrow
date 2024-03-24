@@ -13,7 +13,7 @@ const {
 router.get('/', getBlogs);
 router.post('/', auth, createBlog);
 router.get('/:id', getBlogById);
-router.patch('/:id', auth, editBlogById);
-router.delete('/:id', auth, deleteBlogById);
+router.patch('/edit/:id', auth, editBlogById);
+router.delete('/delete/:id', auth, deleteBlogById);
 
 module.exports = router;
