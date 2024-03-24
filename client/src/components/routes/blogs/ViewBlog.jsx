@@ -43,6 +43,7 @@ function ViewBlog() {
                     `${import.meta.env.VITE_SERVER_URL}/api/blog/${blogId}`
                 );
                 setBlog(data.result);
+                console.log(data.result);
             } catch (error) {
                 console.log(error);
                 dispatch(
@@ -188,7 +189,7 @@ function ViewBlog() {
                         ))}
                     </div>
                 </CardContent>
-                {blog.tags.length > 0 &&
+                {blog?.tags.length > 0 &&
                     blog.tags.map((tag, index) => (
                         <Typography
                             key={index}
