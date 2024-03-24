@@ -188,6 +188,19 @@ function ViewBlog() {
                         ))}
                     </div>
                 </CardContent>
+                {blog.tags.length > 0 &&
+                    blog.tags.map((tag, index) => (
+                        <Typography
+                            key={index}
+                            variant='contained'
+                            sx={{
+                                m: '0.5rem',
+                                color: 'blue',
+                            }}
+                        >
+                            #{tag}
+                        </Typography>
+                    ))}
                 <CardActions sx={{ px: 3, pb: 3 }}>
                     <Stack direction='row' spacing={1}>
                         <IconButton

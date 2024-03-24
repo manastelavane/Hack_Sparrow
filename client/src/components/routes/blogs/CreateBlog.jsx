@@ -97,6 +97,7 @@ function CreateBlog() {
     };
 
     const createNewPost = async (e) => {
+        console.log(disorderTitle);
         e.preventDefault();
         if (!title || !content || !summary) {
             alert('Please fill all the text fields');

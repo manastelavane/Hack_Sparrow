@@ -3,7 +3,7 @@ const UserModel = require('../models/userModel');
 const axios = require('axios');
 
 exports.createBlog = async (req, res) => {
-    const { title, summary, content, cover } = req.body;
+    const { title, summary, content, cover, tags } = req.body;
     const {
         uid: authorId,
         name: authorName,
@@ -28,6 +28,7 @@ exports.createBlog = async (req, res) => {
         // Check if sentiment is positive (you can adjust this logic based on your requirements)
         if (sentimentScore >= 0) {
             // Create the blog if sentiment is positive
+            const lowerCaseTags = tags.map((tag) => tag.toLowerCase());
             const result = await BlogModel.create({
                 title,
                 summary,
@@ -36,6 +37,7 @@ exports.createBlog = async (req, res) => {
                 authorId,
                 authorName,
                 authorUsername,
+                tags: lowerCaseTags,
             });
 
             res.status(201).json({
